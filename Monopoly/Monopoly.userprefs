@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Monopoly\Monopoly.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Monopoly\Joueur.cs">
+    <Files>
+      <File FileName="Monopoly\Program.cs" Line="1" Column="1" />
+      <File FileName="Monopoly\Joueur.cs" Line="23" Column="15" />
+      <File FileName="Monopoly\Banque.cs" Line="1" Column="1" />
+      <File FileName="Monopoly\Partie.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\Projects\Exercice_en_cours\Exercice_en_cours\Program.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
