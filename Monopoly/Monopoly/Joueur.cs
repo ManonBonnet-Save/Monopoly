@@ -22,7 +22,7 @@ namespace Monopoly
 
 		public static void Acheter(Immobilier x)
 		{
-			if (x.proprietaire != "")
+			if (x.proprietaire == "")
 			{
 				if (Argent > x.prixAchat) 
 				{
@@ -30,8 +30,9 @@ namespace Monopoly
 					x.proprietaire = Joueur.Pion;
 					Console.WriteLine ("Vous avez acheté {0}.", x.nom);
 				}
+				else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 			}
-			else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
+			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
 		}
 
 		public static void Vendre()
@@ -39,8 +40,12 @@ namespace Monopoly
 			
 		}
 
-		public static void Hypothéquer()
+		public static void Hypothéquer(Immobilier x)
 		{
+			if (x.nbMaison == 0 && x.nbHotel == 0) 
+			{
+				
+			}
 		}
 
 		public static int Lancer()

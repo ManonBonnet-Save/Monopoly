@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Monopoly
 {
-    abstract class Cartes
+    public abstract class Cartes
     {
         //Attribus
         public abstract string nom { get; protected set; }
@@ -17,13 +17,13 @@ namespace Monopoly
 
     }
 
-    abstract class Immobilier : Cartes
+    public abstract class Immobilier : Cartes
     {
         public override abstract string nom { get; protected set; }
 
     }
 
-    class Propriete : Immobilier
+    public class Propriete : Immobilier
     {
         public override string nom { get; protected set; }
         public int prixAchat { get; protected set; }
@@ -56,7 +56,7 @@ namespace Monopoly
 
     }
 
-    class Gares : Immobilier
+    public class Gares : Immobilier
     {
         public override string nom { get; protected set; }
 
@@ -67,7 +67,7 @@ namespace Monopoly
         }
     }
 
-    class Compagnie : Immobilier
+    public class Compagnie : Immobilier
     {
         public override string nom { get; protected set; }
 
@@ -78,7 +78,7 @@ namespace Monopoly
         }
     }
 
-    class Chance : Cartes
+    public class Chance : Cartes
     {
         public override string nom { get; protected set; }
     }
