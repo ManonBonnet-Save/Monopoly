@@ -20,13 +20,16 @@ namespace Monopoly
 			CompteurPrison = 0;
 		}
 
-		public static void Acheter()
+		public static void Acheter(Immobilier x)
 		{
-			if (Argent > Carte.prixAchat) 
+			if (x.proprietaire != "")
 			{
+				if (Argent > x.prixAchat) 
+				{
 				
-				Carte.proprietaire = Joueur.Pion;
-				Console.WriteLine ("Vous avez acheté {0}.", Carte.nom);
+					x.proprietaire = Joueur.Pion;
+					Console.WriteLine ("Vous avez acheté {0}.", x.nom);
+				}
 			}
 			else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 		}
