@@ -38,6 +38,7 @@
     <Compile Include="Joueur.cs" />
     <Compile Include="Banque.cs" />
     <Compile Include="Partie.cs" />
+    <Compile Include="Cartes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
