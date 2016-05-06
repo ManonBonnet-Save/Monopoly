@@ -60,11 +60,14 @@ namespace Monopoly
 
 				J.Deplacer ();
 				int PositionJoueur = J.Position;
-				Cartes C = _Plateau [PositionJoueur];
+				var C = _Plateau [PositionJoueur];
 				if (C is Gare)
 					Console.WriteLine (C.nom);
 				if (C is Propriete) {
 					Console.WriteLine ("Propriete");
+					Propriete p = (Propriete)C;
+					Console.WriteLine (p.proprietaire);
+					J.Acheter (p);
 				}
 				Console.ReadLine();
 			}

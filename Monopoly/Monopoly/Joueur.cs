@@ -166,17 +166,17 @@ namespace Monopoly
 		public void Acheter(Propriete x)
 		{
 			
-			if (x.proprietaire == "")
+			if (x.proprietaire == null)
 			{
-				if (Argent > x.prixAchat) 
+				Console.WriteLine ("Vous pouvez acheter ce bien");
+				if (Argent >= x.prixAchat) 
 				{
-				
 					x.proprietaire = Pion;
 					Console.WriteLine ("Vous avez acheté {0}.", x.nom);
 				}
 				else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 			}
-			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
+			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.proprietaire);
 		}
 
 		public static void Vendre()

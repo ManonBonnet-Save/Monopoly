@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Monopoly.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Joueur.cs">
     <Files>
-      <File FileName="Cartes.cs" Line="55" Column="43" />
-      <File FileName="Program.cs" Line="67" Column="38" />
+      <File FileName="Cartes.cs" Line="50" Column="49" />
+      <File FileName="Program.cs" Line="69" Column="27" />
+      <File FileName="Joueur.cs" Line="173" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

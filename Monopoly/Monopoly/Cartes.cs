@@ -64,7 +64,7 @@ namespace Monopoly
             prixAchatMaison = prix1Maison;
             nbhotel = 0;
             prixAchatHotel = prixHotel;
-            proprietaire = "";
+            proprietaire = null;
 
         }
 		public Propriete()
