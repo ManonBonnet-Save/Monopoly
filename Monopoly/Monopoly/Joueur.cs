@@ -112,7 +112,7 @@ namespace Monopoly
 				if (Prison == false) {
 					CompteurDouble = CompteurDouble + 1;
 					Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
-					Lancer ();
+					Deplacer ();
 				}
 				else {
 					Console.WriteLine ("Vous sortez de prison et avancez de {0} cases.", De);

@@ -78,14 +78,12 @@ namespace Monopoly
         }
     }
 
-    public class Chance : Cartes
+	//ça ne marche pas, j'ai crée une nouvelle classe
+    public class CartesCommunaute : Cartes
     {
         public override string nom { get; protected set; }
     }
 
-    class CaisseCommunaute : Cartes
-    {
-        public override string nom { get; protected set; }
-    }*/
-}
+		*/
+	}
 }

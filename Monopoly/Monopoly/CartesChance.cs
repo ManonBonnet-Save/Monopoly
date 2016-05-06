@@ -2,7 +2,7 @@
 
 namespace Monopoly
 {
-	public class CartesChance
+	public class CartesChance : Cartes
 	{
 		public CartesChance ()
 		{
