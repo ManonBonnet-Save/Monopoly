@@ -8,7 +8,7 @@ namespace Monopoly
 {
     public abstract class Cartes //test hey!
     {
-        //Attribus
+        /*//Attribus
         public abstract string nom { get; protected set; }
 
         //Constructeurs
@@ -86,5 +86,6 @@ namespace Monopoly
     class CaisseCommunaute : Cartes
     {
         public override string nom { get; protected set; }
-    }
+    }*/
+}
 }

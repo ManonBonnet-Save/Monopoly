@@ -47,8 +47,16 @@ namespace Monopoly
 		{
 			_Maisons = _Maisons + 1;
 		}
-		//Donne une carte chance
-		//Donne une carte caisse de communauté
+		//Donne un hôtel
+		public void DonneHotel(Joueur J)
+		{
+			_Hotels = _Hotels - 1;
+		}
+		//Récupère un Hotel
+		public void RecupereHotel()
+		{
+			_Hotels = _Hotels + 1;
+		}
 
 
 	}

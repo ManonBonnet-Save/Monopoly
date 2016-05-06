@@ -8,21 +8,132 @@ namespace Monopoly
 {
 	public class Joueur
 	{
-		public string Pion { get; protected set;}
-		public int Argent{ get; set;}
-		public int Position;
-		public bool Prison{ get; protected set;}
-		public int CompteurPrison{ get; protected set;}
+		//*****Attributs de la classe*****
+		// Chaque joueur se voit attribuer un numero
+		private static int numero = 1;
+		private int _NumeroJoueur;
+		private string _Pion;
+		private int _Argent;
+		private int _Position;
+		private bool _Prison;
+		private int _CompteurPrison;
+		private int _CompteurDouble;
+		//private List<Cartes> _Cartes;
 
+		//*****Constructeur de la classe*****
 		public Joueur(string couleur)
-
 		{
-			Pion = couleur;
-			Argent = 1500;
-			Position = 0;
-			Prison = false;
-			CompteurPrison = 0;
+			_NumeroJoueur = numero;
+			numero = numero + 1;
+			_Pion = couleur;
+			_Argent = 1500;
+			_Position = 0;
+			_Prison = false;
+			_CompteurPrison = 0;
+			_CompteurDouble = 0;
+			//_Cartes = new List<Cartes> ();
 		}
+
+		//Accesseurs des instances
+		public string Pion
+		{
+			get { return _Pion; }
+			set { _Pion = value; }
+		}
+		public int NumeroJoueur
+		{
+			get { return _NumeroJoueur; }
+			set { _NumeroJoueur = value; }
+		}
+		public int Argent
+		{
+			get { return _Argent; }
+			set { _Argent = value; } 
+		}
+		public int Position
+		{
+			get { return _Position; }
+			set { _Position = value; }
+		}
+		public bool Prison {
+			get { return _Prison; }
+			set { _Prison = value; }
+		}
+		public int CompteurPrison {
+			get { return _CompteurPrison; }
+			set { _CompteurPrison = value; }
+		}
+		public int CompteurDouble {
+			get { return _CompteurDouble; }
+			set { _CompteurDouble = value; }
+		}
+
+
+		//*****Methodes et fonctions*****
+		//Gère le déplacement du joueur
+		public void Deplacer()
+		{
+			if (CompteurDouble == 3) {
+				Prison = true;
+				Console.WriteLine ("Vous allez en prison");
+				Position = 20;
+			}
+			if (CompteurPrison == 3) {
+				CompteurPrison = 0;
+				Prison = false;
+			}
+			Random random = new Random ();
+			//Le joueur lance deux dés de 6 faces 
+			int De1 = random.Next (1, 7);
+			int De2 = random.Next (1, 7);
+			//Affchage du résultat du tirage des deux dès
+			Console.WriteLine ("Vous avez fait un {0} et un {1}.", De1, De2);
+			//Calcul de la somme des deux dés
+			int De = De1 + De2;
+			if (Prison == false) {
+				//On regarde la nouvelle position du joueur
+				int NouvellePosition = Position + De;
+				//Si la nouvelle position est supérieur à 40
+				if (NouvellePosition >= 40) {
+					//La position devient la nouvelle position moins 40 qui correspond au nombre de case
+					Position = NouvellePosition - 40;
+					//A ce moment là on passe par la case 0 donc on ajoute 200
+					this.Argent = this.Argent + 200;
+				}
+			//Sinon la position du joueur est son ancienne position plus la sommes du lancé des dés
+			else
+					Position = Position + De;
+				//Si les deux dés sont égaux
+			}
+			if (Position == 20)
+				Prison = true;
+			if (De1 == De2) 
+			{
+				if (Prison == false) {
+					CompteurDouble = CompteurDouble + 1;
+					Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
+					Lancer ();
+				}
+				else {
+					Console.WriteLine ("Vous sortez de prison et avancez de {0} cases.", De);
+					int NouvellePosition = Position + De;
+					//Si la nouvelle position est supérieur à 40
+					if (NouvellePosition >= 40) {
+						//La position devient la nouvelle position moins 40 qui correspond au nombre de case
+						Position = NouvellePosition - 40;
+						//A ce moment là on passe par la case 0 donc on ajoute 200
+						Argent = Argent + 200;
+					}
+					else
+						Position = Position + De;
+					Prison = false;
+				} 
+			}
+			if (De1 != De2 && Prison == true) {
+				CompteurPrison = CompteurPrison + 1;
+			}
+			CompteurDouble = 0;
+		}		
 		/*
 		public static void Acheter(Immobilier x)
 		{
@@ -52,28 +163,7 @@ namespace Monopoly
 			}
 		}
 */
-		/*
-		public static int Lancer()
-		{
-			Random random = new Random();
 
-			int De1 = random.Next(1, 7);
-			int De2 = random.Next(1,7);
-
-			int De = De1 + De2;
-
-			if (De1 == De2) 
-			{
-				Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez relancer les dés une fois vos opérations terminées.",De1);
-				Position = Position + De;
-				// Le joueur peut faire ce qu'il veut
-				Joueur.Lancer ();
-			}
-			Position = Position + De;
-
-			return Position;
-		}
-		*/
 
 		public static void Constuire()
 		{

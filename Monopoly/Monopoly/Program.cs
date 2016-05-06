@@ -12,7 +12,11 @@ namespace Monopoly
 		{
 			Console.WriteLine ("Hello World!");
 			Joueur J = new Joueur ("red");
-			Banque B = new Banque ();
+			for (int i = 0; i < 10; i++) {
+
+				J.Deplacer ();
+				Console.ReadLine();
+			}
 			Console.ReadLine ();
 		}
 	}
