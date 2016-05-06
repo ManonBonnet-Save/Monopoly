@@ -18,7 +18,7 @@ namespace Monopoly
 		private bool _Prison;
 		private int _CompteurPrison;
 		private int _CompteurDouble;
-		//private List<Cartes> _Cartes;
+		private List<Cartes> _Cartes;
 
 		//*****Constructeur de la classe*****
 		public Joueur(string couleur)
@@ -31,7 +31,7 @@ namespace Monopoly
 			_Prison = false;
 			_CompteurPrison = 0;
 			_CompteurDouble = 0;
-			//_Cartes = new List<Cartes> ();
+			_Cartes = new List<Cartes> ();
 		}
 
 		//Accesseurs des instances
@@ -73,20 +73,14 @@ namespace Monopoly
 		//Gère le déplacement du joueur
 		public void Deplacer()
 		{
-			//Si le compteur de double est à 3
-			if (CompteurDouble == 3) {
-				//On passe la condition prison à vraie
-				Prison = true;
-				Console.WriteLine ("Vous allez en prison");
-				//La position du joueur devient celle de la case prison
-				Position = 20;
-			}
 			//Si le joueur a passé 3 tours en prison
 			if (CompteurPrison == 3) {
 				//le compteur prison repasse à 0
 				CompteurPrison = 0;
+				CompteurDouble = 0;
 				//La condition prison devient fausse
 				Prison = false;
+				Console.WriteLine ("Vous sortez de prison");
 			}
 			Random random = new Random ();
 			//Le joueur lance deux dés de 6 faces 
@@ -118,32 +112,44 @@ namespace Monopoly
 				if (Prison == false) {
 					//le compteur de double du joueur est incrémenté de 1
 					CompteurDouble = CompteurDouble + 1;
+					//Si le compteur de double est à 3
+					if (CompteurDouble == 3) {
+						//On passe la condition prison à vraie
+						Prison = true;
+						Console.WriteLine ("Vous avez fait un troisième double avec les dés {0}, vous allez en prison", De1);
+						//La position du joueur devient celle de la case prison
+						Position = 20;
+					} 
+					else {
 					Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
 					//Le joueur se déplace à nouveau
 					Deplacer ();
-				}
-				else {
-					Console.WriteLine ("Vous sortez de prison et avancez de {0} cases.", De);
-					int NouvellePosition = Position + De;
-					//Si la nouvelle position est supérieur à 40
-					if (NouvellePosition >= 40) {
-						//La position devient la nouvelle position moins 40 qui correspond au nombre de case
-						Position = NouvellePosition - 40;
-						//A ce moment là on passe par la case 0 donc on ajoute 200
-						Argent = Argent + 200;
 					}
-					else
-						Position = Position + De;
-					Prison = false;
+				}
+				if (Prison == true && CompteurDouble < 3)
+				{
+						Console.WriteLine ("Vous sortez de prison et avancez de {0} cases.", De);
+						int NouvellePosition = Position + De;
+						//Si la nouvelle position est supérieur à 40
+						if (NouvellePosition >= 40) {
+							//La position devient la nouvelle position moins 40 qui correspond au nombre de case
+							Position = NouvellePosition - 40;
+							//A ce moment là on passe par la case 0 donc on ajoute 200
+							Argent = Argent + 200;
+						} else
+							Position = Position + De;
+						Prison = false;
 				} 
 			}
 			//Si les dés ne sont pas identiques et que le joueur est en prison 
 			if (De1 != De2 && Prison == true) {
 				//Le compteur de tour en prison est augmenté de 1
 				CompteurPrison = CompteurPrison + 1;
+				Console.WriteLine ("Vous restez en prison");
 			}
 			//Le compteur de double devient à 0 à la fin du déplacement du joueur
-			CompteurDouble = 0;
+			if (Prison == false)
+				CompteurDouble = 0;
 		}	
 		//Ce que fait le joueur une fois qu'il s'est déplacé
 		public void Action()

@@ -30,7 +30,7 @@ namespace Monopoly
 		{
 		}
 		public override string nom { get; protected set; }
-
+		//méthode pioche carte communaute dans liste des cartes
 	}
 
     public abstract class Immobilier : Cartes
@@ -39,6 +39,7 @@ namespace Monopoly
 		{
 		}
         public override abstract string nom { get; protected set; }
+		//méthode pioche carte communaute dans liste des cartes
 
     }
 
