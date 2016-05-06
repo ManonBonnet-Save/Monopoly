@@ -52,7 +52,7 @@ namespace Monopoly
         public int prixAchatMaison { get; protected set; }
         public int nbhotel { get; protected set; }
         public int prixAchatHotel { get; protected set; }
-        public string proprietaire { get; protected set; }
+        public string proprietaire { get; set; }
 
         //Constructeurs
         public Propriete(string nomDeLaRue, int montantAcheter, int montantLoyer, int prix1Maison, int prixHotel)

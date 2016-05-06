@@ -63,6 +63,9 @@ namespace Monopoly
 				Cartes C = _Plateau [PositionJoueur];
 				if (C is Gare)
 					Console.WriteLine (C.nom);
+				if (C is Propriete) {
+					Console.WriteLine ("Propriete");
+				}
 				Console.ReadLine();
 			}
 			Console.ReadLine ();

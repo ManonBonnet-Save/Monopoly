@@ -34,6 +34,8 @@ namespace Monopoly
 			_Cartes = new List<Cartes> ();
 		}
 
+	
+
 		//Accesseurs des instances
 		public string Pion
 		{
@@ -73,11 +75,12 @@ namespace Monopoly
 		//Gère le déplacement du joueur
 		public void Deplacer()
 		{
+			if (CompteurDouble == 3 && Prison == true)
+				CompteurDouble = 0;
 			//Si le joueur a passé 3 tours en prison
 			if (CompteurPrison == 3) {
 				//le compteur prison repasse à 0
 				CompteurPrison = 0;
-				CompteurDouble = 0;
 				//La condition prison devient fausse
 				Prison = false;
 				Console.WriteLine ("Vous sortez de prison");
@@ -100,13 +103,21 @@ namespace Monopoly
 					//A ce moment là on passe par la case 0 donc on ajoute 200
 					this.Argent = this.Argent + 200;
 				}
-			//Sinon la position du joueur est son ancienne position plus la sommes du lancé des dés
-			else
-					Position = Position + De;
-				//Si les deux dés sont égaux
+				//Sinon la position du joueur est son ancienne position plus la sommes du lancé des dés
+				else
+						Position = Position + De;			
 			}
-			if (Position == 20)
+			//Si les dés ne sont pas identiques et que le joueur est en prison 
+			if (De1 != De2 && Prison == true) {
+				//Le compteur de tour en prison est augmenté de 1
+				CompteurPrison = CompteurPrison + 1;
+				Console.WriteLine ("Vous restez en prison");
+			}
+			if (Position == 20 && Prison == false) {
 				Prison = true;
+				Console.WriteLine ("Vous allez en prison");
+			}
+			//Si les deux dés sont égaux
 			if (De1 == De2) 
 			{
 				if (Prison == false) {
@@ -141,12 +152,7 @@ namespace Monopoly
 						Prison = false;
 				} 
 			}
-			//Si les dés ne sont pas identiques et que le joueur est en prison 
-			if (De1 != De2 && Prison == true) {
-				//Le compteur de tour en prison est augmenté de 1
-				CompteurPrison = CompteurPrison + 1;
-				Console.WriteLine ("Vous restez en prison");
-			}
+
 			//Le compteur de double devient à 0 à la fin du déplacement du joueur
 			if (Prison == false)
 				CompteurDouble = 0;
@@ -157,8 +163,7 @@ namespace Monopoly
 			int EmplacementJoueur = Position;
 
 		}
-		/*
-		public static void Acheter(Immobilier x)
+		public void Acheter(Propriete x)
 		{
 			
 			if (x.proprietaire == "")
@@ -166,14 +171,14 @@ namespace Monopoly
 				if (Argent > x.prixAchat) 
 				{
 				
-					x.proprietaire = Joueur.Pion;
+					x.proprietaire = Pion;
 					Console.WriteLine ("Vous avez acheté {0}.", x.nom);
 				}
 				else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
 		}
-		*/
+
 		public static void Vendre()
 		{
 			
