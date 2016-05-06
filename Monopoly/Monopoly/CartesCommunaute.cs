@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Monopoly
 {
-	public class Partie
+	public class CartesCommunaute : Cartes
 	{
-		public Partie ()
+		public CartesCommunaute ()
 		{
 		}
 	}

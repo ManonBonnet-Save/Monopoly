@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -19,7 +23,7 @@ namespace Monopoly
 			Prison = false;
 			CompteurPrison = 0;
 		}
-
+		/*
 		public static void Acheter(Immobilier x)
 		{
 			if (x.proprietaire == "")
@@ -34,20 +38,21 @@ namespace Monopoly
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
 		}
-
+*/
 		public static void Vendre()
 		{
 			
 		}
-
-		public static void Hypothéquer(Immobilier x)
+		/*
+		public static void Hypothequer(Immobilier x)
 		{
 			if (x.nbMaison == 0 && x.nbHotel == 0) 
 			{
 				
 			}
 		}
-
+*/
+		/*
 		public static int Lancer()
 		{
 			Random random = new Random();
@@ -68,6 +73,7 @@ namespace Monopoly
 
 			return Position;
 		}
+		*/
 
 		public static void Constuire()
 		{
