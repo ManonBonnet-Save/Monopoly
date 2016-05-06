@@ -144,9 +144,17 @@ namespace Monopoly
 			}
 			//Le compteur de double devient à 0 à la fin du déplacement du joueur
 			CompteurDouble = 0;
-		}		
+		}	
+		//Ce que fait le joueur une fois qu'il s'est déplacé
+		public void Action()
+		{
+			int EmplacementJoueur = Position;
+
+		}
+		/*
 		public static void Acheter(Immobilier x)
 		{
+			
 			if (x.proprietaire == "")
 			{
 				if (Argent > x.prixAchat) 
@@ -159,6 +167,7 @@ namespace Monopoly
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
 		}
+		*/
 		public static void Vendre()
 		{
 			

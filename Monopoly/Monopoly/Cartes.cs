@@ -16,17 +16,17 @@ namespace Monopoly
         //Methodes
 
     }
-	public class CartesChance : Cartes
+	public class CarteChance : Cartes
 	{
-		public CartesChance ()
+		public CarteChance ()
 		{
 		}
 		public override string nom { get; protected set; }
 
 	}
-	public class CartesCommunaute : Cartes
+	public class CarteCommunaute : Cartes
 	{
-		public CartesCommunaute ()
+		public CarteCommunaute ()
 		{
 		}
 		public override string nom { get; protected set; }
@@ -35,6 +35,9 @@ namespace Monopoly
 
     public abstract class Immobilier : Cartes
     {
+		public Immobilier ()
+		{
+		}
         public override abstract string nom { get; protected set; }
 
     }
@@ -63,6 +66,9 @@ namespace Monopoly
             proprietaire = "";
 
         }
+		public Propriete()
+		{
+		}
 
         //Méthodes
         public void modificationLoyer()
@@ -72,12 +78,12 @@ namespace Monopoly
 
     }
 
-    public class Gares : Immobilier
+    public class Gare : Immobilier
     {
         public override string nom { get; protected set; }
 
         //Constructeurs
-        public Gares(string nomDeLaGare)
+        public Gare(string nomDeLaGare)
         {
             nom = nomDeLaGare;
         }
@@ -93,13 +99,4 @@ namespace Monopoly
             nom = nomDeLaCompagnie;
         }
     }
-	/*
-	//ça ne marche pas, j'ai crée une nouvelle classe
-    public class CartesCommunaute : Cartes
-    {
-        public override string nom { get; protected set; }
-    }
-
-		*/
-
-	}
+}

@@ -9,13 +9,13 @@ namespace Monopoly
 	public class Banque
 	{
 		//Attributs de la classe Banque
-		private List<CartesChance> _CartesChance;
-		private List<CartesCommunaute> _CartesCommunaute;
+		private List<CarteChance> _CartesChance;
+		private List<CarteCommunaute> _CartesCommunaute;
 		private int _Maisons;
 		private int _Hotels;
 
 		//Constructeur de la classe Banque
-		public Banque (List<CartesChance> CCh, List<CartesCommunaute> CCo)
+		public Banque (List<CarteChance> CCh, List<CarteCommunaute> CCo)
 		{
 			_CartesChance = CCh;
 			_CartesCommunaute = CCo;
