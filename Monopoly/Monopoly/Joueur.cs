@@ -73,13 +73,19 @@ namespace Monopoly
 		//Gère le déplacement du joueur
 		public void Deplacer()
 		{
+			//Si le compteur de double est à 3
 			if (CompteurDouble == 3) {
+				//On passe la condition prison à vraie
 				Prison = true;
 				Console.WriteLine ("Vous allez en prison");
+				//La position du joueur devient celle de la case prison
 				Position = 20;
 			}
+			//Si le joueur a passé 3 tours en prison
 			if (CompteurPrison == 3) {
+				//le compteur prison repasse à 0
 				CompteurPrison = 0;
+				//La condition prison devient fausse
 				Prison = false;
 			}
 			Random random = new Random ();
@@ -110,8 +116,10 @@ namespace Monopoly
 			if (De1 == De2) 
 			{
 				if (Prison == false) {
+					//le compteur de double du joueur est incrémenté de 1
 					CompteurDouble = CompteurDouble + 1;
 					Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
+					//Le joueur se déplace à nouveau
 					Deplacer ();
 				}
 				else {
@@ -129,12 +137,14 @@ namespace Monopoly
 					Prison = false;
 				} 
 			}
+			//Si les dés ne sont pas identiques et que le joueur est en prison 
 			if (De1 != De2 && Prison == true) {
+				//Le compteur de tour en prison est augmenté de 1
 				CompteurPrison = CompteurPrison + 1;
 			}
+			//Le compteur de double devient à 0 à la fin du déplacement du joueur
 			CompteurDouble = 0;
 		}		
-		/*
 		public static void Acheter(Immobilier x)
 		{
 			if (x.proprietaire == "")
@@ -149,7 +159,6 @@ namespace Monopoly
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.nom);
 		}
-*/
 		public static void Vendre()
 		{
 			

@@ -41,8 +41,6 @@
     <Compile Include="Banque.cs" />
     <Compile Include="Partie.cs" />
     <Compile Include="Cartes.cs" />
-    <Compile Include="CartesChance.cs" />
-    <Compile Include="CartesCommunaute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
