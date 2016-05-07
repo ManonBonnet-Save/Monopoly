@@ -28,7 +28,7 @@ namespace Monopoly
 			_Plateau [10] = null;
 			_Plateau [11] = new Propriete ("B",100);
 			_Plateau [12] = _CCo;
-			_Plateau [13] = new Propriete(2000,100,10,10,"A",100);
+			_Plateau [13] = new Propriete(100,10,10,"A",100);
 			_Plateau [14] = new Propriete ("B",100);
 			_Plateau [15] = new Gare ("Gare de Lyon",100);
 			_Plateau [16] = new Propriete  ("B",100);
