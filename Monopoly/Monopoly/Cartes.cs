@@ -9,65 +9,86 @@ namespace Monopoly
     public abstract class Cartes //test hey!
     {
         //Attribus
-        public abstract string nom { get; protected set; }
+		private string _Nom;
 
         //Constructeurs
+		public Cartes(string nom)
+		{
+			_Nom = nom;
+		}
 
+		//*****Accesseurs*****
+		public string Nom{
+			get { return _Nom; }
+			set { _Nom = value; }
+		}
         //Methodes
 
     }
 	public class CarteChance : Cartes
 	{
-		public CarteChance ()
+		private List<CarteChance> _PiocheCarteChance;
+		public CarteChance (string nom):base(nom)
 		{
+			_PiocheCarteChance = new List<CarteChance> ();
 		}
-		public override string nom { get; protected set; }
-
+		public List<CarteChance> PiocheCarteChance
+		{
+			get { return _PiocheCarteChance;}
+			set { _PiocheCarteChance = value; }
+		}
 	}
 	public class CarteCommunaute : Cartes
 	{
-		public CarteCommunaute ()
+		private List<int> _Pioche;
+		public CarteCommunaute (string nom) : base (nom)
 		{
+			_Pioche = new List<int> {2,3};
 		}
-		public override string nom { get; protected set; }
 		//méthode pioche carte communaute dans liste des cartes
 	}
 
     public abstract class Immobilier : Cartes
     {
-		public Immobilier ()
+		private Joueur _Proprietaire;
+		private int _PrixAchat { get; set; }
+		//*****Constructeur*****
+		public Immobilier (string nom, int prixAchat):base(nom)
 		{
+			_Proprietaire = null;
+			_PrixAchat = prixAchat;
 		}
-        public override abstract string nom { get; protected set; }
-		//méthode pioche carte communaute dans liste des cartes
-
+		//*****Accesseurs*****
+		public Joueur Proprietaire
+		{
+			get { return _Proprietaire;}
+			set { _Proprietaire = value; }
+		}
+		public int PrixAchat
+		{
+			get { return _PrixAchat;}
+			set { _PrixAchat = value; }
+		}
     }
 
     public class Propriete : Immobilier
     {
-        public override string nom { get; protected set; }
-        public int prixAchat { get; protected set; }
-        public int loyer { get; protected set; }
+        public int loyer { get; set; }
         public int nbmaison { get; protected set; }
         public int prixAchatMaison { get; protected set; }
         public int nbhotel { get; protected set; }
         public int prixAchatHotel { get; protected set; }
-        public string proprietaire { get; set; }
 
         //Constructeurs
-        public Propriete(string nomDeLaRue, int montantAcheter, int montantLoyer, int prix1Maison, int prixHotel)
+		public Propriete(int montantAcheter, int montantLoyer, int prix1Maison, int prixHotel, string nom, int pa) : base(nom,pa)
         {
-            nom = nomDeLaRue;
-            prixAchat = montantAcheter;
             loyer = montantLoyer;
             nbmaison = 0;
             prixAchatMaison = prix1Maison;
             nbhotel = 0;
             prixAchatHotel = prixHotel;
-            proprietaire = null;
-
         }
-		public Propriete()
+		public Propriete(string nom, int pa):base(nom,pa)
 		{
 		}
 
@@ -81,23 +102,17 @@ namespace Monopoly
 
     public class Gare : Immobilier
     {
-        public override string nom { get; protected set; }
-
         //Constructeurs
-        public Gare(string nomDeLaGare)
+		public Gare(string nom, int pa): base(nom, pa)
         {
-            nom = nomDeLaGare;
-        }
+		}
     }
 
     public class Compagnie : Immobilier
     {
-        public override string nom { get; protected set; }
-
         //Constructeurs
-        public Compagnie(string nomDeLaCompagnie)
+		public Compagnie(string nom, int pa): base(nom, pa)
         {
-            nom = nomDeLaCompagnie;
         }
     }
 }

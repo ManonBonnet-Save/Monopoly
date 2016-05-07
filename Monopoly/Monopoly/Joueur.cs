@@ -156,27 +156,66 @@ namespace Monopoly
 			//Le compteur de double devient à 0 à la fin du déplacement du joueur
 			if (Prison == false)
 				CompteurDouble = 0;
+			if (Position == 0)
+				Console.WriteLine ("Vous êtes sur la case départ.");
 		}	
 		//Ce que fait le joueur une fois qu'il s'est déplacé
-		public void Action()
-		{
-			int EmplacementJoueur = Position;
+		public void Action(Cartes C)
 
-		}
-		public void Acheter(Propriete x)
 		{
-			
-			if (x.proprietaire == null)
+			//Si le joueur n'est pas en prison ou sur la case de départ
+			if (Position != 20 && Position != 0) {
+				//Si la case est une gare ou une propriété
+				if (C is Gare || C is Propriete) {
+					//On caste la case comme un immobilier
+					Immobilier I = (Immobilier)C;
+					//On achète la case
+
+					if (I.Proprietaire == null)
+						Acheter (I);
+					else if (I.Proprietaire != this)
+						//Payer (I.proprietaire);
+						Console.WriteLine ("Vous devez de l'argent à");
+					else if (I.Proprietaire == this)
+						Console.WriteLine ("Ce bien vous appartient");
+				}
+				//Si la case est une carte chance
+				if (C is CarteChance) {
+					Console.WriteLine ("Vous tirez une carte chance");
+					//On caste la case comme une carte chance
+					CarteChance CCh = (CarteChance)C;
+					Console.WriteLine (CCh.PiocheCarteChance[0].Nom);
+					//On ajoute la première carte à la fin de la pioche
+					CCh.PiocheCarteChance.Add (CCh.PiocheCarteChance [0]);
+					//On supprime la première carte qui est maintenant à la fin de la pioche
+					CCh.PiocheCarteChance.RemoveAt (0);
+				}
+				if (C is CarteCommunaute) {
+					Console.WriteLine ("Vous tirez une carte de communauté");
+					CarteCommunaute CCo = (CarteCommunaute)C;
+				}
+				if (C == null) {
+					Console.WriteLine ("Rajouter la carte ou la case");
+				}
+
+			}
+		}
+		public void Acheter(Immobilier x)
+		{
+			if (x.Proprietaire == null)
 			{
 				Console.WriteLine ("Vous pouvez acheter ce bien");
-				if (Argent >= x.prixAchat) 
+				if (Argent >= x.PrixAchat) 
 				{
-					x.proprietaire = Pion;
-					Console.WriteLine ("Vous avez acheté {0}.", x.nom);
+					x.Proprietaire = this;
+					Argent = Argent - x.PrixAchat;
+					Console.WriteLine ("Vous avez acheté {0}.", x.Nom);
+					Propriete P = (Propriete)x;
+					P.
 				}
 				else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 			}
-			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.proprietaire);
+			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
 		public static void Vendre()
