@@ -9,7 +9,7 @@ namespace Monopoly
     public abstract class Cartes //test hey!
     {
         //Attribus
-		private string _Nom;
+		protected string _Nom;
 
         //Constructeurs
 		public Cartes(string nom)

@@ -210,8 +210,7 @@ namespace Monopoly
 					x.Proprietaire = this;
 					Argent = Argent - x.PrixAchat;
 					Console.WriteLine ("Vous avez acheté {0}.", x.Nom);
-					Propriete P = (Propriete)x;
-					P.
+
 				}
 				else Console.WriteLine("Vous ne possédez pas l'argent nécessaire pour acheter ce bien.");
 			}
