@@ -25,29 +25,43 @@ namespace Monopoly
         //Methodes
 
     }
+	//Piioche des cartes chances
 	public class CarteChance : Cartes
 	{
+		//*****Attributs******
+		//Création d'une liste qui contiendra toutes les cartes chances
 		private List<CarteChance> _PiocheCarteChance;
+		//*****Constructeur*****
 		public CarteChance (string nom):base(nom)
 		{
 			_PiocheCarteChance = new List<CarteChance> ();
 		}
+		//*****Accesseurs*****
 		public List<CarteChance> PiocheCarteChance
 		{
 			get { return _PiocheCarteChance;}
 			set { _PiocheCarteChance = value; }
 		}
 	}
+	//Pioche des cartes de communauté
 	public class CarteCommunaute : Cartes
 	{
-		private List<int> _Pioche;
+		//*****Attributs*****
+		//Création d'ne liste qi contiendra toutes les cartes communautés
+		private List<CarteCommunaute> _PiocheCarteCommunaute;
+		//*****Constructeur*****
 		public CarteCommunaute (string nom) : base (nom)
 		{
-			_Pioche = new List<int> {2,3};
+			_PiocheCarteCommunaute = new List<CarteCommunaute> ();
 		}
-		//méthode pioche carte communaute dans liste des cartes
-	}
+		//*****Accesseurs*****
+		public List<CarteCommunaute> PiocheCarteCommunaute
+		{
+			get { return _PiocheCarteCommunaute;}
+			set { _PiocheCarteCommunaute = value; }
+		}	}
 
+	//Création des cartes immobilières
     public abstract class Immobilier : Cartes
     {
 		protected Joueur _Proprietaire;
@@ -71,9 +85,11 @@ namespace Monopoly
 		}
     }
 
+	//Création de la class des cartes propriétés
     public class Propriete : Immobilier
     {
 		private string _Groupe;
+		private List<int> _CasesFamille;
 		private int _Loyer;
 		private int _Loyer1Maison;
 		private int _Loyer2Maisons;
@@ -131,7 +147,7 @@ namespace Monopoly
         }
 
     }
-
+	//Création de la classe des cartes gares
     public class Gare : Immobilier
     {
         //Constructeurs
@@ -139,7 +155,7 @@ namespace Monopoly
         {
 		}
     }
-
+	//Création de la classe des cartes compagnies
     public class Compagnie : Immobilier
     {
         //Constructeurs

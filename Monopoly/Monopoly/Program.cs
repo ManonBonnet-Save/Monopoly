@@ -10,12 +10,15 @@ namespace Monopoly
 	{
 		public static void Main (string[] args)
 		{
+			//Création de la pioche des cartes communautés
 			CarteCommunaute _CCo = new CarteCommunaute ("Cartes Communautés");
+			//Création de la pioche des cartes chances
 			CarteChance _CCh = new CarteChance ("Cartes Chances");
 			_CCh.PiocheCarteChance.Add(new CarteChance("prison"));
 			_CCh.PiocheCarteChance.Add(new CarteChance("prison2"));
+			//Création du tableau de jeu
 			Cartes[] _Plateau = new Cartes[40];
-			_Plateau [0] = null;
+			_Plateau [0] = null; // à créer
 			_Plateau [1] = new Propriete ("B",100);
 			_Plateau [2] = _CCo;
 			_Plateau [3] = new Propriete ("B",100);
