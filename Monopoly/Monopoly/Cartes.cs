@@ -66,6 +66,7 @@ namespace Monopoly
     {
 		protected Joueur _Proprietaire;
 		protected int _PrixAchat;
+
 		//*****Constructeur*****
 		public Immobilier (string nom, int prixAchat):base(nom)
 		{
@@ -97,6 +98,7 @@ namespace Monopoly
 		private int _Loyer4Maisons;
 		private int _NbMaison;
 		private int _PrixAchatMaison;
+        private int _LoyerHotel;
 		private bool _Hotel;
 		private int _PrixAchatHotel; 
 		private int _Hypotheque;
@@ -143,17 +145,35 @@ namespace Monopoly
         //Méthodes
         public void modificationLoyer()
         {
-
+            if (_NbMaison>1)
+            {
+                _Loyer1Maison = _Loyer + (_NbMaison*100); //Vérifier si le loyer évolue de la même manière sur tous les terrains. 
+                // Si c'est le cas, alors faire une méthode identique pour juste selon le nombre de maison. 
+            }
         }
 
     }
 	//Création de la classe des cartes gares
     public class Gare : Immobilier
     {
+        private List<int> _CasesGares;
+        private int _Loyer;
+        private int _NbGares;
+
         //Constructeurs
 		public Gare(string nom, int pa): base(nom, pa)
         {
+            _Loyer = 25;
 		}
+
+        //Méthodes
+        public void modificationLoyer()
+        {
+            if (_NbGares > 1)
+            {
+                _Loyer = _Loyer * 2^(_NbGares -1); 
+            }
+        }
     }
 	//Création de la classe des cartes compagnies
     public class Compagnie : Immobilier
