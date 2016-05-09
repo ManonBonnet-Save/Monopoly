@@ -10,7 +10,7 @@ namespace Monopoly
 	{
 		//*****Attributs de la classe*****
 		// Chaque joueur se voit attribuer un numero
-		private static int numero = 1;
+		private static int numero = 1; //Nbr de joueur
 		private int _NumeroJoueur;
 		private string _Pion;
 		private int _Argent;
@@ -18,7 +18,7 @@ namespace Monopoly
 		private bool _Prison;
 		private int _CompteurPrison;
 		private int _CompteurDouble;
-		private List<Cartes> _Cartes;
+		private List<Cartes> _Cartes; //possessions
 
 		//*****Constructeur de la classe*****
 		public Joueur(string couleur)
