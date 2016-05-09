@@ -175,7 +175,8 @@ namespace Monopoly
 						Acheter (I);
 					else if (I.Proprietaire != this)
 						//Payer (I.proprietaire);
-						Console.WriteLine ("Vous devez de l'argent à");
+						Console.WriteLine ("Vous devez de l'argent à {0}", I.Proprietaire);
+					
 					else if (I.Proprietaire == this)
 						Console.WriteLine ("Ce bien vous appartient");
 				}
@@ -217,9 +218,33 @@ namespace Monopoly
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
-		public static void Vendre()
+		public static void Vendre(Immobilier x, Joueur J, int PrixChoisi)
 		{
-			
+			if (x.Proprietaire == this) 
+			{
+				if (x is Propriete)
+				{
+					Propriete ppt = (Propriete)x;
+					if(){// si maisons sur une autre carte du groupe
+						if (ppt.NbMaison == 0 && ppt.Hotel == 0) 
+						{
+							Console.WriteLine ("Vous pouvez vendre ce bien");
+							Argent = Argent + PrixChoisi;
+							ppt.Proprietaire = J;
+							J.Argent = Argent - PrixChoisi;
+						}
+						else Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
+					}
+
+					else Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
+				}
+			}
+			else Console.WriteLine("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
+		}
+
+		public static void Payer(Joueur J)
+		{
+			if 
 		}
 		/*
 		public static void Hypothequer(Immobilier x)
