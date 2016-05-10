@@ -66,12 +66,14 @@ namespace Monopoly
     {
 		protected Joueur _Proprietaire;
 		protected int _PrixAchat;
+        private int _Loyer;
 
-		//*****Constructeur*****
-		public Immobilier (string nom, int prixAchat):base(nom)
+        //*****Constructeur*****
+        public Immobilier (string nom, int prixAchat, int loyer):base(nom)
 		{
 			_Proprietaire = null;
 			_PrixAchat = prixAchat;
+            _Loyer = loyer;
 		}
 		//*****Accesseurs*****
 		public Joueur Proprietaire
@@ -84,6 +86,11 @@ namespace Monopoly
 			get { return _PrixAchat;}
 			set { _PrixAchat = value; }
 		}
+        public int Loyer
+        {
+            get { return _Loyer; }
+            set { _Loyer = value; }
+        }
     }
 
 	//Création de la class des cartes propriétés
@@ -91,7 +98,7 @@ namespace Monopoly
     {
 		private string _Groupe;
 		private List<int> _CasesFamille;
-		private int _Loyer;
+		
 		private int _Loyer1Maison;
 		private int _Loyer2Maisons;
 		private int _Loyer3Maisons;
@@ -104,23 +111,18 @@ namespace Monopoly
 		private int _Hypotheque;
 
         //Constructeurs
-		public Propriete(int loyer, int prixAchatMaison, int prixAchatHotel, string nom, int pa) : base(nom,pa)
+		public Propriete(int prixAchatMaison, int prixAchatHotel, string nom, int pa, int loyer) : base(nom,pa,loyer)
         {
-            _Loyer = loyer;
 			_NbMaison = 0;
             _PrixAchatMaison = prixAchatMaison;
             _Hotel = false;
             _PrixAchatHotel = prixAchatHotel;
         }
-		public Propriete(string nom, int pa):base(nom,pa)
+		public Propriete(string nom, int pa, int loyer):base(nom,pa,loyer)
 		{
 		}
 		//*****Accesseurs*****
-		public int Loyer
-		{
-			get { return _Loyer;}
-			set { _Loyer = value; }
-		}
+		
 		public int NbMaison {
 			get { return _NbMaison; }
 			set { _NbMaison = value; }
@@ -147,7 +149,7 @@ namespace Monopoly
         {
             if (_NbMaison>1)
             {
-                _Loyer1Maison = _Loyer + (_NbMaison*100); //Vérifier si le loyer évolue de la même manière sur tous les terrains. 
+                _Loyer1Maison = Loyer + (_NbMaison*100); //Vérifier si le loyer évolue de la même manière sur tous les terrains. 
                 // Si c'est le cas, alors faire une méthode identique pour juste selon le nombre de maison. 
             }
         }
@@ -161,17 +163,29 @@ namespace Monopoly
         private int _NbGares;
 
         //Constructeurs
-		public Gare(string nom, int pa): base(nom, pa)
+        public Gare(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
             _Loyer = 25;
 		}
+
+        //*****Accesseurs*****
+        public int Loyer
+        {
+            get { return _Loyer; }
+            set { _Loyer = value; }
+        }
+        public int NbMaison
+        {
+            get { return _NbGares; }
+            set { _NbGares = value; }
+        }
 
         //Méthodes
         public void modificationLoyer()
         {
             if (_NbGares > 1)
             {
-                _Loyer = _Loyer * 2^(_NbGares -1); 
+                _Loyer = _Loyer * 2^(_NbGares -1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
             }
         }
     }
@@ -179,7 +193,7 @@ namespace Monopoly
     public class Compagnie : Immobilier
     {
         //Constructeurs
-		public Compagnie(string nom, int pa): base(nom, pa)
+		public Compagnie(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
         }
     }
