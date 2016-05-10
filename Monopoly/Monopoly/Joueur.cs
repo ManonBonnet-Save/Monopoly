@@ -19,6 +19,7 @@ namespace Monopoly
 		private int _CompteurPrison;
 		private int _CompteurDouble;
 		private List<Cartes> _Cartes; //possessions
+		private List<Immobilier> _Possessions;
 
 		//*****Constructeur de la classe*****
 		public Joueur(string couleur)
@@ -32,6 +33,7 @@ namespace Monopoly
 			_CompteurPrison = 0;
 			_CompteurDouble = 0;
 			_Cartes = new List<Cartes> ();
+			_Possessions = new List<Immobilier> ();
 		}
 
 	
@@ -69,6 +71,10 @@ namespace Monopoly
 			get { return _CompteurDouble; }
 			set { _CompteurDouble = value; }
 		}
+
+		public List<Immobilier> Possessions{
+			get { return _Possessions; }
+			set { _Possessions = value; }
 
 
 		//*****Methodes et fonctions*****
@@ -222,7 +228,7 @@ namespace Monopoly
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
-		/*
+
 		public void Vendre(Immobilier x, Joueur J, int PrixChoisi)
 		{
 			if (x.Proprietaire == this) 
@@ -253,11 +259,11 @@ namespace Monopoly
 		}
 
 
-		public void Payer(Joueur J)
+		public void Payer(Joueur J,Cartes[] Plateau)// mettre le plateau en accessible pour l'enlever après
 		{
-	
-
-
+			Cartes C = Plateau [Position];
+			Immobilier I = (Immobilier)C;
+			Argent = Argent - I.Loyer
 		}
 		/*
 		public static void Hypothequer(Immobilier x)
