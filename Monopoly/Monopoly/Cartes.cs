@@ -117,9 +117,9 @@ namespace Monopoly
         }
 
         //*****Méthodes*****
-        public int modificationLoyer(Immobilier I)
+        public int modificationLoyer()
         {
-            if (I is Propriete)
+            if (this is Propriete)
             {
                 if (NbMaison > 0)
                 {
@@ -129,13 +129,13 @@ namespace Monopoly
                 }
                 return Loyer;
             }
-            if (I is Gare)
+            if (this is Gare)
             {
                 if (Proprietaire != null)
                 {
                     foreach (Immobilier element in Proprietaire.Possessions)
                     {
-                        if (element is Propriete.Gare)
+                        if (element is Gare)
                         {
                             NbGares += 1;
                         }
@@ -155,7 +155,7 @@ namespace Monopoly
                 {
                     foreach (Immobilier element in Proprietaire.Possessions)
                     {
-                        if (element is Propriete.Compagnie)
+                        if (element is Compagnie)
                         {
                             NbCompagnies += 1;
                         }
