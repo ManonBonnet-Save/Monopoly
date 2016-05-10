@@ -6,31 +6,33 @@ using System.Threading.Tasks;
 
 namespace Monopoly
 {
-    public abstract class Cartes //test hey!
+    public abstract class Cartes
     {
-        //Attribus
+        //*****Attribus*****
 		protected string _Nom;
 
-        //Constructeurs
+        //*****Constructeurs*****
 		public Cartes(string nom)
 		{
 			_Nom = nom;
 		}
 
 		//*****Accesseurs*****
-		public string Nom{
+		public string Nom
+        {
 			get { return _Nom; }
 			set { _Nom = value; }
 		}
-        //Methodes
+        //*****Methodes*****
 
     }
-	//Piioche des cartes chances
+	//Pioche des cartes chances
 	public class CarteChance : Cartes
 	{
 		//*****Attributs******
 		//Création d'une liste qui contiendra toutes les cartes chances
 		private List<CarteChance> _PiocheCarteChance;
+
 		//*****Constructeur*****
 		public CarteChance (string nom):base(nom)
 		{
@@ -49,6 +51,7 @@ namespace Monopoly
 		//*****Attributs*****
 		//Création d'ne liste qi contiendra toutes les cartes communautés
 		private List<CarteCommunaute> _PiocheCarteCommunaute;
+
 		//*****Constructeur*****
 		public CarteCommunaute (string nom) : base (nom)
 		{
@@ -98,7 +101,6 @@ namespace Monopoly
     {
 		private string _Groupe;
 		private List<int> _CasesFamille;
-		
 		private int _Loyer1Maison;
 		private int _Loyer2Maisons;
 		private int _Loyer3Maisons;
@@ -110,7 +112,7 @@ namespace Monopoly
 		private int _PrixAchatHotel; 
 		private int _Hypotheque;
 
-        //Constructeurs
+        //*****Constructeurs*****
 		public Propriete(int prixAchatMaison, int prixAchatHotel, string nom, int pa, int loyer) : base(nom,pa,loyer)
         {
 			_NbMaison = 0;
@@ -118,9 +120,7 @@ namespace Monopoly
             _Hotel = false;
             _PrixAchatHotel = prixAchatHotel;
         }
-		public Propriete(string nom, int pa, int loyer):base(nom,pa,loyer)
-		{
-		}
+        
 		//*****Accesseurs*****
 		
 		public int NbMaison {
@@ -144,13 +144,13 @@ namespace Monopoly
 		}
 
 
-        //Méthodes
+        //*****Méthodes*****
         public void modificationLoyer()
         {
             if (_NbMaison>1)
             {
                 _Loyer1Maison = Loyer + (_NbMaison*100); //Vérifier si le loyer évolue de la même manière sur tous les terrains. 
-                // Si c'est le cas, alors faire une méthode identique pour juste selon le nombre de maison. 
+                // Si c'est le cas, alors faire une méthode identique juste selon le nombre de maison. 
             }
         }
 
@@ -162,37 +162,46 @@ namespace Monopoly
         private int _Loyer;
         private int _NbGares;
 
-        //Constructeurs
+        //*****Constructeurs*****
         public Gare(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
             _Loyer = 25;
 		}
 
         //*****Accesseurs*****
-        public int Loyer
-        {
-            get { return _Loyer; }
-            set { _Loyer = value; }
-        }
-        public int NbMaison
+        public int NbGares
         {
             get { return _NbGares; }
             set { _NbGares = value; }
         }
 
-        //Méthodes
+        //*****Méthodes*****
         public void modificationLoyer()
         {
-            if (_NbGares > 1)
+            if (Proprietaire != null)
             {
-                _Loyer = _Loyer * 2^(_NbGares -1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
+                foreach (Immobilier element in Proprietaire.Possessions)
+                {
+                    if (element is Gare)
+                    {
+                        _NbGares += 1;
+                    }
+                }
+                if (_NbGares > 1)
+                {
+                    Loyer = Loyer * 2 ^ (_NbGares - 1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
+                }
+            }
+            else
+            {
+                Loyer = 0;
             }
         }
     }
 	//Création de la classe des cartes compagnies
     public class Compagnie : Immobilier
     {
-        //Constructeurs
+        //*****Constructeurs*****
 		public Compagnie(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
         }
