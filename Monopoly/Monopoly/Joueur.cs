@@ -77,6 +77,12 @@ namespace Monopoly
 			set { _Possessions = value; }
 
 			}
+
+		public List<Cartes> Cartes{
+			get { return _Cartes; }
+			set { _Cartes = value; }
+
+		}
 		//*****Methodes et fonctions*****
 		//Gère le déplacement du joueur
 		public void Deplacer(Cartes[]Plateau)
@@ -229,15 +235,17 @@ namespace Monopoly
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
-		public void VendreImmobilier(Immobilier x, Joueur J, int PrixChoisi)
+		public void VendreCarte(Cartes x, Joueur J, int PrixChoisi)
 		{
-			if (x.Proprietaire == this) 
-			{
-				if (x is Propriete)
-				{
-					Propriete p = (Propriete)x;
+			if (x is Immobilier) {
+				Immobilier i = (Immobilier) x;
 
-					/*if (null) {// si maisons sur une autre carte du groupe
+				if (i.Proprietaire == this) {
+					if (i is Propriete) {
+						Propriete p = (Propriete)i;
+
+						if () {
+							foreach (Propriete f in p.CaseFamille)// si maisons sur une autre carte du groupe
 						if (p.NbMaison == 0 && p.Hotel == 0) {
 							Console.WriteLine ("Vous pouvez vendre ce bien");
 							Argent = Argent + PrixChoisi;
@@ -246,18 +254,40 @@ namespace Monopoly
 						} else {
 							Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
 							//rajouter fonction vendre maison ou hotel
+							VendreConstruction(p);
 						}
 					} else {
 						Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
 
-					}*/
+					}
 
-				}
-				//if (x is )
+					}
+					if (i is Gare) {
+						Argent = Argent + PrixChoisi;
+						i.Proprietaire = J;
+						J.Argent = Argent - PrixChoisi;
+					}
 
-			}
-			else Console.WriteLine("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
-		}
+					if (i is Compagnie) {
+						Argent = Argent + PrixChoisi;
+						i.Proprietaire = J;
+						J.Argent = Argent - PrixChoisi;
+					}
+
+				} else
+					Console.WriteLine ("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", i.Proprietaire.Pion);
+			}// fin if (x is Immobilier)
+
+			if (x is CarteChance || x is CarteCommunaute) {
+				if (Cartes.Contains (x) == true)
+					Cartes.Remove (x);
+				J.Cartes.Add (x);
+				Argent = Argent + PrixChoisi;
+				J.Argent = Argent - PrixChoisi;
+			} else
+				Console.WriteLine ("Cette carte ne vous appartient pas. Vous ne pouvez pas la vendre");
+
+		}//FIN DE VENDRECARTE
 
 		public void VendreConstruction(Propriete p)
 		{
@@ -269,7 +299,7 @@ namespace Monopoly
 			if (p.NbMaison > 0) {
 				Argent = Argent + p.prixAchatMaison;
 				p.NbMaison = p.NbMaison - 1;
-				Banque.Maisons = Banque.Maisons + 1;
+				Banque.RecupereMaison();
 			}
 
 		}
