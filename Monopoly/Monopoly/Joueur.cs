@@ -73,7 +73,7 @@ namespace Monopoly
 
 		//*****Methodes et fonctions*****
 		//Gère le déplacement du joueur
-		public void Deplacer()
+		public void Deplacer(Cartes[]Plateau)
 		{
 			if (CompteurDouble == 3 && Prison == true)
 				CompteurDouble = 0;
@@ -132,9 +132,13 @@ namespace Monopoly
 						Position = 20;
 					} 
 					else {
-					Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
-					//Le joueur se déplace à nouveau
-					Deplacer ();
+						Console.WriteLine ("Vous avez fait un double {0}. Vous pouvez lancer les dés.", De1);
+						//Le joueur fait une action
+						Action(Position,Plateau);
+						Console.WriteLine (Position);
+						Console.ReadLine ();
+						//Le joueur se déplace à nouveau
+						Deplacer (Plateau);
 					}
 				}
 				if (Prison == true && CompteurDouble < 3)
@@ -160,9 +164,10 @@ namespace Monopoly
 				Console.WriteLine ("Vous êtes sur la case départ.");
 		}	
 		//Ce que fait le joueur une fois qu'il s'est déplacé
-		public void Action(Cartes C)
+		public void Action(int position, Cartes[] Plateau)
 
 		{
+			Cartes C = Plateau [Position];
 			//Si le joueur n'est pas en prison ou sur la case de départ
 			if (Position != 20 && Position != 0) {
 				//Si la case est une gare ou une propriété
@@ -217,34 +222,42 @@ namespace Monopoly
 			}
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
-
-		public static void Vendre(Immobilier x, Joueur J, int PrixChoisi)
+		/*
+		public void Vendre(Immobilier x, Joueur J, int PrixChoisi)
 		{
 			if (x.Proprietaire == this) 
 			{
 				if (x is Propriete)
 				{
 					Propriete ppt = (Propriete)x;
-					if(){// si maisons sur une autre carte du groupe
-						if (ppt.NbMaison == 0 && ppt.Hotel == 0) 
-						{
+
+					if (null) {// si maisons sur une autre carte du groupe
+						if (ppt.NbMaison == 0 && ppt.Hotel == 0) {
 							Console.WriteLine ("Vous pouvez vendre ce bien");
 							Argent = Argent + PrixChoisi;
 							ppt.Proprietaire = J;
 							J.Argent = Argent - PrixChoisi;
+						} else {
+							Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
+							//rajouter fonction vendre maison ou hotel
 						}
-						else Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
-					}
+					} else {
+						Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
+						//rajouter fonction vendre maison ou hotel
 
-					else Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
+					}
 				}
+
 			}
 			else Console.WriteLine("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
-		public static void Payer(Joueur J)
+
+		public void Payer(Joueur J)
 		{
-			if 
+	
+
+
 		}
 		/*
 		public static void Hypothequer(Immobilier x)

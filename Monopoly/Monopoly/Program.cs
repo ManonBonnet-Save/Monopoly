@@ -60,12 +60,12 @@ namespace Monopoly
 			_Plateau [39] = new Propriete  ("B",100);
 
 
-			Console.WriteLine ("Hello World!");
+
 			Joueur J = new Joueur ("red");
 			for (int i = 0; i < 60; i++) {
 
-				J.Deplacer ();
-				J.Action (_Plateau[J.Position]);
+				J.Deplacer (_Plateau);
+				J.Action (J.Position,_Plateau);
 				Console.WriteLine (J.Position);
 				Console.ReadLine ();
 				}
