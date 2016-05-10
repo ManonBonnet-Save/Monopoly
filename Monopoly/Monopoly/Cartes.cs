@@ -165,7 +165,7 @@ namespace Monopoly
         //*****Constructeurs*****
         public Gare(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
-            _Loyer = 25;
+            _Loyer = 0;
 		}
 
         //*****Accesseurs*****
@@ -189,7 +189,7 @@ namespace Monopoly
                 }
                 if (_NbGares > 1)
                 {
-                    Loyer = Loyer * 2 ^ (_NbGares - 1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
+                    Loyer = 25 * 2 ^ (_NbGares - 1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
                 }
             }
             else
@@ -201,9 +201,65 @@ namespace Monopoly
 	//Création de la classe des cartes compagnies
     public class Compagnie : Immobilier
     {
+        private List<int> _CasesCompagnies;
+        private int _Loyer;
+        private int _NbCompagnies;
+
         //*****Constructeurs*****
-		public Compagnie(string nom, int pa, int loyer): base(nom, pa, loyer)
+        public Compagnie(string nom, int pa, int loyer): base(nom, pa, loyer)
         {
+            _Loyer = 0;
+        }
+
+        //*****Accesseurs*****
+        public int NbCompagnies
+        {
+            get { return _NbCompagnies; }
+            set { _NbCompagnies = value; }
+        }
+
+        //*****Méthodes*****
+        public void modificationLoyer()
+        {
+            if (Proprietaire != null)
+            {
+                foreach (Immobilier element in Proprietaire.Possessions)
+                {
+                    if (element is Compagnie)
+                    {
+                        _NbCompagnies += 1;
+                    }
+                }
+                // On ne teste pas pour 0, puisque dans ce cas le propriétaire est null.
+
+                if (_NbCompagnies == 1) //Pour une seule compagnie le Loyer= 4*(somme des dés)
+                {
+                    //Le joueur lance deux dés de 6 faces
+                    Random random = new Random();
+                    int De1 = random.Next(1, 7);
+                    int De2 = random.Next(1, 7);
+                    int De = De1 + De2;
+                    Loyer = 4*De;
+                }
+
+                if (_NbCompagnies == 2) //Pour une deux compagnies le Loyer= 10*(somme des dés)
+                {
+                    //Le joueur lance deux dés de 6 faces
+                    Random random = new Random();
+                    int De1 = random.Next(1, 7);
+                    int De2 = random.Next(1, 7);
+                    int De = De1 + De2;
+                    Loyer = 10 * De;
+                }
+                else
+                {
+                    Console.WriteLine("Il y a un problème, avec la comptabilisation des compagnies");
+                }
+            }
+            else
+            {
+                Loyer = 0;
+            }
         }
     }
 }
