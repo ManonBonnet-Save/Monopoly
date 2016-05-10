@@ -18,7 +18,7 @@ namespace Monopoly
 			_CCh.PiocheCarteChance.Add(new CarteChance("prison2"));
 			//Création du tableau de jeu
 			Cartes[] _Plateau = new Cartes[40];
-			_Plateau [0] = null; // à créer
+			/*_Plateau [0] = null; // à créer
 			_Plateau [1] = new Propriete ("B",100);
 			_Plateau [2] = _CCo;
 			_Plateau [3] = new Propriete ("B",100);
@@ -57,7 +57,7 @@ namespace Monopoly
 			_Plateau [36] = _CCh;
 			_Plateau [37] = new Propriete  ("B",100);
 			_Plateau [38] = null;
-			_Plateau [39] = new Propriete  ("B",100);
+			_Plateau [39] = new Propriete  ("B",100);*/
 
 
 

@@ -70,13 +70,13 @@ namespace Monopoly
 		public int CompteurDouble {
 			get { return _CompteurDouble; }
 			set { _CompteurDouble = value; }
+		
 		}
-
 		public List<Immobilier> Possessions{
 			get { return _Possessions; }
 			set { _Possessions = value; }
 
-
+			}
 		//*****Methodes et fonctions*****
 		//Gère le déplacement du joueur
 		public void Deplacer(Cartes[]Plateau)
@@ -229,19 +229,19 @@ namespace Monopoly
 			else Console.WriteLine("Vous ne pouvez pas acheter ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
-		public void Vendre(Immobilier x, Joueur J, int PrixChoisi)
+		public void VendreImmobilier(Immobilier x, Joueur J, int PrixChoisi)
 		{
 			if (x.Proprietaire == this) 
 			{
 				if (x is Propriete)
 				{
-					Propriete ppt = (Propriete)x;
+					Propriete p = (Propriete)x;
 
-					if (null) {// si maisons sur une autre carte du groupe
-						if (ppt.NbMaison == 0 && ppt.Hotel == 0) {
+					/*if (null) {// si maisons sur une autre carte du groupe
+						if (p.NbMaison == 0 && p.Hotel == 0) {
 							Console.WriteLine ("Vous pouvez vendre ce bien");
 							Argent = Argent + PrixChoisi;
-							ppt.Proprietaire = J;
+							p.Proprietaire = J;
 							J.Argent = Argent - PrixChoisi;
 						} else {
 							Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
@@ -249,21 +249,37 @@ namespace Monopoly
 						}
 					} else {
 						Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
-						//rajouter fonction vendre maison ou hotel
 
-					}
+					}*/
+
 				}
+				//if (x is )
 
 			}
 			else Console.WriteLine("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", x.Proprietaire.Pion);
 		}
 
+		public void VendreConstruction(Propriete p)
+		{
+			if (p.Hotel == true) {
+				Argent = Argent + p.PrixAchatHotel;
+				p.Hotel = false;
+				Banque.RecupereHotel ();
+			}
+			if (p.NbMaison > 0) {
+				Argent = Argent + p.prixAchatMaison;
+				p.NbMaison = p.NbMaison - 1;
+				Banque.Maisons = Banque.Maisons + 1;
+			}
+
+		}
 
 		public void Payer(Joueur J,Cartes[] Plateau)// mettre le plateau en accessible pour l'enlever après
 		{
 			Cartes C = Plateau [Position];
 			Immobilier I = (Immobilier)C;
-			Argent = Argent - I.Loyer
+			Argent = Argent - I.Loyer;
+			J.Argent = J.Argent + I.Loyer;		
 		}
 		/*
 		public static void Hypothequer(Immobilier x)
