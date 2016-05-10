@@ -116,7 +116,7 @@ namespace Monopoly
             set { _NbCompagnies = value; }
         }
 
-        //*****Méthodes*****
+        //*****Méthodes***** //Virtual Override
         public int modificationLoyer()
         {
             if (this is Propriete)
