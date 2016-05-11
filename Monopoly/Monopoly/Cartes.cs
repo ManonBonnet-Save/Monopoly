@@ -66,7 +66,7 @@ namespace Monopoly
     }
 
     //Création des cartes immobilières
-    public abstract class Immobilier : Cartes
+    public class Immobilier : Cartes
     {
         protected Joueur _Proprietaire;
         protected int _PrixAchat;
@@ -127,7 +127,7 @@ namespace Monopoly
                                                       // Si c'est le cas, alors faire une méthode identique juste selon le nombre de maison. 
                     return Loyer;
                 }
-                return Loyer;
+                //return Loyer;
             }
             if (this is Gare)
             {

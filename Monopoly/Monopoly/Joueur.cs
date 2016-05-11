@@ -256,6 +256,7 @@ namespace Monopoly
 							//rajouter fonction vendre maison ou hotel
 							VendreConstruction(p);
 						}
+							
 					} else {
 						Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
 
