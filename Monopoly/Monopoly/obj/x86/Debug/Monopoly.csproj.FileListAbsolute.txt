@@ -10,3 +10,4 @@ C:\Users\user\Documents\GitHub\Monopoly\Monopoly\Monopoly\bin\Debug\Monopoly.exe
 C:\Users\user\Documents\GitHub\Monopoly\Monopoly\Monopoly\bin\Debug\Monopoly.pdb
 C:\Users\renau_000\Documents\GitHub\Monopoly\Monopoly\Monopoly\obj\x86\Debug\Monopoly.exe
 C:\Users\renau_000\Documents\GitHub\Monopoly\Monopoly\Monopoly\obj\x86\Debug\Monopoly.pdb
+C:\Users\renau_000\Documents\GitHub\Monopoly\Monopoly\Monopoly\obj\x86\Debug\Monopoly.csprojResolveAssemblyReference.cache
