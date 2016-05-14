@@ -21,5 +21,25 @@ namespace Monopoly
         //*****Accesseurs*****
 
         //*****Méthodes*****
+        public override int modificationLoyer()
+        {
+                if (Proprietaire != null)
+                {
+                    foreach (Immobilier element in Proprietaire.Possessions)
+                    {
+                        if (element is Gare)
+                        {
+                            NbGares += 1;
+                        }
+                    }
+                    Loyer = 25 * 2 ^ (NbGares - 1); //Le loyer dépend de la quantité de gare que possède la personne: 25,50,100,200
+                    return Loyer;
+                }
+                else
+                {
+                    Loyer = 0;
+                    return Loyer;
+                }
+        }
     }
 }

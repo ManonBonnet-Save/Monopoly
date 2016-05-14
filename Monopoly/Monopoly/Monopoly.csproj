@@ -36,10 +36,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaissedeCommunauté.cs" />
+    <Compile Include="Case.cs" />
+    <Compile Include="CaseAleatoire.cs" />
+    <Compile Include="CaseDeterminante.cs" />
     <Compile Include="Chance.cs" />
     <Compile Include="Compagnie.cs" />
     <Compile Include="Gare.cs" />
     <Compile Include="Immobilier.cs" />
+    <Compile Include="Partie.cs" />
+    <Compile Include="Plateau.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Joueur.cs" />

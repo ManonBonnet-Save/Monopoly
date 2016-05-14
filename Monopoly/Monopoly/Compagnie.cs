@@ -23,5 +23,51 @@ namespace Monopoly
 
 
         //*****Méthodes*****
+        public override int modificationLoyer()
+        {
+            if (Proprietaire != null)
+            {
+                foreach (Immobilier element in Proprietaire.Possessions)
+                {
+                    if (element is Compagnie)
+                    {
+                        NbCompagnies += 1;
+                    }
+                }
+                // On ne teste pas pour 0, puisque dans ce cas le propriétaire est null.
+
+                if (NbCompagnies == 1) //Pour une seule compagnie le Loyer= 4*(somme des dés)
+                {
+                    //Le joueur lance deux dés de 6 faces
+                    Random random = new Random();
+                    int De1 = random.Next(1, 7);
+                    int De2 = random.Next(1, 7);
+                    int De = De1 + De2;
+                    Loyer = 4 * De;
+                    return Loyer;
+                }
+
+                if (NbCompagnies == 2) //Pour une deux compagnies le Loyer= 10*(somme des dés)
+                {
+                    //Le joueur lance deux dés de 6 faces
+                    Random random = new Random();
+                    int De1 = random.Next(1, 7);
+                    int De2 = random.Next(1, 7);
+                    int De = De1 + De2;
+                    Loyer = 10 * De;
+                    return Loyer;
+                }
+                else
+                {
+                    Console.WriteLine("Il y a un problème, avec la comptabilisation des compagnies");
+                    return Loyer = 0;
+                }
+            }
+            else
+            {
+                Loyer = 0;
+                return Loyer;
+            }
+        }
     }
 }

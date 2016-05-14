@@ -36,8 +36,6 @@ namespace Monopoly
 			_Possessions = new List<Immobilier> ();
 		}
 
-	
-
 		//Accesseurs des instances
 		public string Pion
 		{
@@ -63,40 +61,33 @@ namespace Monopoly
 			get { return _Prison; }
 			set { _Prison = value; }
 		}
-		public int CompteurPrison {
+		public int CompteurPrison
+        {
 			get { return _CompteurPrison; }
 			set { _CompteurPrison = value; }
 		}
-		public int CompteurDouble {
+		public int CompteurDouble
+        {
 			get { return _CompteurDouble; }
 			set { _CompteurDouble = value; }
-		
 		}
-		public List<Immobilier> Possessions{
+		public List<Immobilier> Possessions
+        {
 			get { return _Possessions; }
 			set { _Possessions = value; }
-
-			}
-
-		public List<Cartes> Cartes{
+		}
+		public List<Cartes> Cartes
+        {
 			get { return _Cartes; }
 			set { _Cartes = value; }
-
 		}
+
 		//*****Methodes et fonctions*****
 		//Gère le déplacement du joueur
 		public void Deplacer(Cartes[]Plateau)
 		{
 			if (CompteurDouble == 3 && Prison == true)
 				CompteurDouble = 0;
-			//Si le joueur a passé 3 tours en prison
-			if (CompteurPrison == 3) {
-				//le compteur prison repasse à 0
-				CompteurPrison = 0;
-				//La condition prison devient fausse
-				Prison = false;
-				Console.WriteLine ("Vous sortez de prison");
-			}
 			Random random = new Random ();
 			//Le joueur lance deux dés de 6 faces 
 			int De1 = random.Next (1, 7);
@@ -105,26 +96,7 @@ namespace Monopoly
 			Console.WriteLine ("Vous avez fait un {0} et un {1}.", De1, De2);
 			//Calcul de la somme des deux dés
 			int De = De1 + De2;
-			if (Prison == false) {
-				//On regarde la nouvelle position du joueur
-				int NouvellePosition = Position + De;
-				//Si la nouvelle position est supérieur à 40
-				if (NouvellePosition >= 40) {
-					//La position devient la nouvelle position moins 40 qui correspond au nombre de case
-					Position = NouvellePosition - 40;
-					//A ce moment là on passe par la case 0 donc on ajoute 200
-					this.Argent = this.Argent + 200;
-				}
-				//Sinon la position du joueur est son ancienne position plus la sommes du lancé des dés
-				else
-						Position = Position + De;			
-			}
-			//Si les dés ne sont pas identiques et que le joueur est en prison 
-			if (De1 != De2 && Prison == true) {
-				//Le compteur de tour en prison est augmenté de 1
-				CompteurPrison = CompteurPrison + 1;
-				Console.WriteLine ("Vous restez en prison");
-			}
+			
 			if (Position == 20 && Prison == false) {
 				Prison = true;
 				Console.WriteLine ("Vous allez en prison");
@@ -169,7 +141,7 @@ namespace Monopoly
 				} 
 			}
 
-			//Le compteur de double devient à 0 à la fin du déplacement du joueur
+			//Le compteur de double revient à 0 à la fin du déplacement du joueur
 			if (Prison == false)
 				CompteurDouble = 0;
 			if (Position == 0)
@@ -237,49 +209,59 @@ namespace Monopoly
 
 		public void VendreCarte(Cartes x, Joueur J, int PrixChoisi)
 		{
-			if (x is Immobilier) {
+			if (x is Immobilier)
+            {
 				Immobilier i = (Immobilier) x;
 
-				if (i.Proprietaire == this) {
-					if (i is Propriete) {
-						Propriete p = (Propriete)i;
+				if (i.Proprietaire == this)
+                {
+					//if (i is Propriete) {
+					//	Propriete p = (Propriete)i;
 
-						if () {
-							foreach (Propriete f in p.CaseFamille)// si maisons sur une autre carte du groupe
-						if (p.NbMaison == 0 && p.Hotel == 0) {
-							Console.WriteLine ("Vous pouvez vendre ce bien");
-							Argent = Argent + PrixChoisi;
-							p.Proprietaire = J;
-							J.Argent = Argent - PrixChoisi;
-						} else {
-							Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
-							//rajouter fonction vendre maison ou hotel
-							VendreConstruction(p);
-						}
-							
-					} else {
-						Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
+					//	if ()
+     //                   {
+					//		foreach (Propriete f in p.CasesFamille)// si maisons sur une autre carte du groupe
+					//	if (p.NbMaison == 0 && p.Hotel==false)
+     //                   {
+					//		Console.WriteLine ("Vous pouvez vendre ce bien");
+					//		Argent = Argent + PrixChoisi;
+					//		p.Proprietaire = J;
+					//		J.Argent = Argent - PrixChoisi;
+					//	}
+     //                   else
+     //                   {
+					//		Console.WriteLine ("Il vous reste des maisons ou un hotel sur ce terrain");
+					//		//rajouter fonction vendre maison ou hotel
+					//		VendreConstruction(p);
+					//	}	
+					//    }
+     //                   else
+     //                   {
+					//	Console.WriteLine ("Il vous reste des maisons ou des hotels sur des terrains de la même famille");
+     //                   }
 
-					}
-
-					}
-					if (i is Gare) {
+					//}
+					if (i is Gare)
+                    {
 						Argent = Argent + PrixChoisi;
 						i.Proprietaire = J;
 						J.Argent = Argent - PrixChoisi;
 					}
 
-					if (i is Compagnie) {
+					if (i is Compagnie)
+                    {
 						Argent = Argent + PrixChoisi;
 						i.Proprietaire = J;
 						J.Argent = Argent - PrixChoisi;
 					}
 
-				} else
+				}
+                else
 					Console.WriteLine ("Vous ne pouvez pas vendre ce bien. Il appartient au joueur {0}", i.Proprietaire.Pion);
 			}// fin if (x is Immobilier)
 
-			if (x is CarteChance || x is CarteCommunaute) {
+			if (x is CarteChance || x is CarteCommunaute)
+            {
 				if (Cartes.Contains (x) == true)
 					Cartes.Remove (x);
 				J.Cartes.Add (x);
@@ -290,20 +272,22 @@ namespace Monopoly
 
 		}//FIN DE VENDRECARTE
 
-		public void VendreConstruction(Propriete p)
-		{
-			if (p.Hotel == true) {
-				Argent = Argent + p.PrixAchatHotel;
-				p.Hotel = false;
-				Banque.RecupereHotel ();
-			}
-			if (p.NbMaison > 0) {
-				Argent = Argent + p.prixAchatMaison;
-				p.NbMaison = p.NbMaison - 1;
-				Banque.RecupereMaison();
-			}
+		//public void VendreConstruction(Propriete p)
+		//{
+		//	if (p.Hotel == true)
+  //          {
+		//		Argent = Argent + p.PrixAchatHotel;
+		//		p.Hotel = false;
+		//		Banque.RecupereHotel(); //On cherche à faire appel à la méthode qui se trouve dans la classe Banque
+		//	}
+		//	if (p.NbMaison > 0)
+  //          {
+		//		Argent = Argent + p.PrixAchatMaison;
+		//		p.NbMaison = p.NbMaison - 1;
+		//		Banque.RecupereMaison();
+		//	}
 
-		}
+		//}
 
 		public void Payer(Joueur J,Cartes[] Plateau)// mettre le plateau en accessible pour l'enlever après
 		{
