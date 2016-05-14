@@ -18,7 +18,7 @@ namespace Monopoly
 		private bool _Prison;
 		private int _CompteurPrison;
 		private int _CompteurDouble;
-		private List<Cartes> _Cartes; //possessions
+		private List<Cartes> _Cartes; //Cartes spéciales
 		private List<Immobilier> _Possessions;
 
 		//*****Constructeur de la classe*****

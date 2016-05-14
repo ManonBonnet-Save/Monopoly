@@ -68,7 +68,7 @@ namespace Monopoly
                         Console.WriteLine("Vous avez fait un troisième double, de {0}, vous allez en prison sans passer par la case départ!", De1);
                         ListeJoueurs[joueurActuel].CompteurDouble = 0;
                         ListeJoueurs[joueurActuel].CompteurPrison = 1;
-                        ListeJoueurs[joueurActuel].Position = 10; //Déplacement du joueur sur la case prison.
+                        ListeJoueurs[joueurActuel].Position = 11; //Déplacement du joueur sur la case prison.
                         continue;
                     }
                     else { ListeJoueurs[joueurActuel].CompteurDouble++; }
