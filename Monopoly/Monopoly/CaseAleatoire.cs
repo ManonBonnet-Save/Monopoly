@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Monopoly
 {
-    class CaseAleatoire: Case
-    {
-    }
+    //class CaseAleatoire: Case
+    //{
+    //}
 }

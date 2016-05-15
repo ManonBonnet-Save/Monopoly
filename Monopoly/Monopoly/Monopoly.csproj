@@ -38,7 +38,11 @@
     <Compile Include="CaissedeCommunauté.cs" />
     <Compile Include="Case.cs" />
     <Compile Include="CaseAleatoire.cs" />
-    <Compile Include="CaseDeterminante.cs" />
+    <Compile Include="CasePolice.cs" />
+    <Compile Include="CasePropriété.cs" />
+    <Compile Include="CaseTaxe.cs" />
+    <Compile Include="CaseTirage.cs" />
+    <Compile Include="CaseVide.cs" />
     <Compile Include="Chance.cs" />
     <Compile Include="Compagnie.cs" />
     <Compile Include="Gare.cs" />

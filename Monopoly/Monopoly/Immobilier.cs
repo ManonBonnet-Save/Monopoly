@@ -12,9 +12,6 @@ namespace Monopoly
         protected Joueur _Proprietaire;
         private int _PrixAchat;
         private int _Loyer;
-        private int _NbMaison;
-        private int _NbGares;
-        private int _NbCompagnies;
 
         //*****Constructeur*****
         public Immobilier(string nom, int prixAchat, int loyer) : base(nom)
@@ -22,8 +19,6 @@ namespace Monopoly
             _Proprietaire = null;
             _PrixAchat = prixAchat;
             _Loyer = loyer;
-            _NbMaison = 0;
-            _NbGares = 0;
         }
         //*****Accesseurs*****
         public Joueur Proprietaire
@@ -41,21 +36,21 @@ namespace Monopoly
             get { return _Loyer; }
             set { _Loyer = modificationLoyer(); }
         }
-        public int NbMaison
-        {
-            get { return _NbMaison; }
-            set { _NbMaison = value; }
-        }
-        public int NbGares
-        {
-            get { return _NbGares; }
-            set { _NbGares = value; }
-        }
-        public int NbCompagnies
-        {
-            get { return _NbCompagnies; }
-            set { _NbCompagnies = value; }
-        }
+        //public int NbMaison
+        //{
+            //get { return _NbMaison; }
+            //set { _NbMaison = value; }
+        //}
+        //public int NbGares
+        //{
+        //    get { return _NbGares; }
+        //    set { _NbGares = value; }
+        //}
+        //public int NbCompagnies
+        //{
+        //    get { return _NbCompagnies; }
+        //    set { _NbCompagnies = value; }
+        //}
 
         //*****Méthodes***** //Virtual Override
         public virtual int modificationLoyer()

@@ -31,12 +31,12 @@ namespace Monopoly
                 {
                     if (element is Compagnie)
                     {
-                        NbCompagnies += 1;
+                        _NbCompagnies += 1;
                     }
                 }
                 // On ne teste pas pour 0, puisque dans ce cas le propriétaire est null.
 
-                if (NbCompagnies == 1) //Pour une seule compagnie le Loyer= 4*(somme des dés)
+                if (_NbCompagnies == 1) //Pour une seule compagnie le Loyer= 4*(somme des dés)
                 {
                     //Le joueur lance deux dés de 6 faces
                     Random random = new Random();
@@ -47,7 +47,7 @@ namespace Monopoly
                     return Loyer;
                 }
 
-                if (NbCompagnies == 2) //Pour une deux compagnies le Loyer= 10*(somme des dés)
+                if (_NbCompagnies == 2) //Pour une deux compagnies le Loyer= 10*(somme des dés)
                 {
                     //Le joueur lance deux dés de 6 faces
                     Random random = new Random();

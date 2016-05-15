@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Monopoly
 {
-    public abstract class Cartes
+    public class Cartes
     {
         //*****Attribus*****
         protected string _Nom;
