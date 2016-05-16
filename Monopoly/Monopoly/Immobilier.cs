@@ -36,21 +36,6 @@ namespace Monopoly
             get { return _Loyer; }
             set { _Loyer = modificationLoyer(); }
         }
-        //public int NbMaison
-        //{
-            //get { return _NbMaison; }
-            //set { _NbMaison = value; }
-        //}
-        //public int NbGares
-        //{
-        //    get { return _NbGares; }
-        //    set { _NbGares = value; }
-        //}
-        //public int NbCompagnies
-        //{
-        //    get { return _NbCompagnies; }
-        //    set { _NbCompagnies = value; }
-        //}
 
         //*****Méthodes***** //Virtual Override
         public virtual int modificationLoyer()

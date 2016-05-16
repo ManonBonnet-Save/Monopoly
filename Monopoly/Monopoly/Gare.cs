@@ -9,7 +9,6 @@ namespace Monopoly
     //Création de la classe des cartes gares
     public class Gare : Immobilier
     {
-        private List<int> _CasesGares;
         private int _Loyer;
         private int _NbGares;
 
@@ -20,7 +19,11 @@ namespace Monopoly
         }
 
         //*****Accesseurs*****
-
+        public new int Loyer
+        {
+            get { return _Loyer; }
+            set { _Loyer = modificationLoyer(); }
+        }
         //*****Méthodes*****
         public override int modificationLoyer()
         {

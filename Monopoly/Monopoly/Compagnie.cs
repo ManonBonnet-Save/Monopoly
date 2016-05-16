@@ -18,6 +18,11 @@ namespace Monopoly
         {
             _Loyer = 0;
         }
+        public new int Loyer
+        {
+            get { return _Loyer; }
+            set { _Loyer = modificationLoyer(); }
+        }
 
         //*****Accesseurs*****
 

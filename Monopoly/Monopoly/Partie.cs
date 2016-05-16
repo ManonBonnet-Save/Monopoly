@@ -35,6 +35,8 @@ namespace Monopoly
                 ListeJoueurs.Add(new Joueur(CouleurDuJoueur));
             }
 
+            Banque Banque = new Banque();
+
         }
         public void BouclePrincipale()
         {
@@ -72,7 +74,6 @@ namespace Monopoly
                         j.Position = 10; //Déplacement du joueur sur la case prison.
                     }
                     else { j.CompteurDouble++; }
-                    Console.WriteLine("Le compteur prison est {0} ", j.CompteurPrison);
                 }
                 else
                 {
@@ -102,7 +103,17 @@ namespace Monopoly
                     {
                         Console.WriteLine("Le joueur {0} à perdu", j.NumeroJoueur);
 
-                        //TODO enlevé les propriétés du joueur
+                        //Suppression des possessions du joueur qui as perdu
+                        foreach (Immobilier I in j.Possessions)
+                        {
+                            I.Proprietaire = null;
+                            foreach (Propriete P in j.Possessions)
+                            {
+                                P.NbMaison = 0;
+                                P.Hotel = false;
+                            }
+                            j.Possessions.Remove(I);
+                        }
 
                         ListeJoueurs.RemoveAt(joueurActuel);
                         joueurActuel = joueurActuel % ListeJoueurs.Count();
@@ -110,7 +121,9 @@ namespace Monopoly
                     }
                 }
 
-                Console.WriteLine("Le joueur {0} possède {1}€", j.NumeroJoueur, j.Argent);
+                Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
+
+                //Acheter des maison
 
 
                 if ((De1 != De2) || j.EstEnPrison())

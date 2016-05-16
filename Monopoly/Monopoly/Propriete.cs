@@ -10,7 +10,7 @@ namespace Monopoly
     public class Propriete : Immobilier
     {
         private string _Groupe;
-        private List<int> _CasesFamille;
+        private int _NbCasesFamille;
         private int _PrixAchatMaison;
         private bool _Hotel;
         private int _PrixAchatHotel;
@@ -20,7 +20,7 @@ namespace Monopoly
         private int _Loyer;
 
         //*****Constructeurs*****
-        public Propriete(string nom, int pa, int loyer, int prixAchatMaison, int Loyer1Maison, int Loyer2Maison, int Loyer3Maison,int Loyer4Maison, int prixAchatHotel, int LoyerHotel) : base(nom, pa, loyer)
+        public Propriete(string nom, int pa, int loyer, int prixAchatMaison, int Loyer1Maison, int Loyer2Maison, int Loyer3Maison,int Loyer4Maison, int prixAchatHotel, int LoyerHotel, int TailleFamille) : base(nom, pa, loyer)
         {
             _PrixAchatMaison = prixAchatMaison;
             _Hotel = false;
@@ -32,6 +32,7 @@ namespace Monopoly
             _LoyersDuTerrain[3] = Loyer3Maison;
             _LoyersDuTerrain[4] = Loyer4Maison;
             _LoyersDuTerrain[5] = LoyerHotel;
+            _NbCasesFamille = TailleFamille;
         }
 
         //*****Accesseurs*****
@@ -39,6 +40,11 @@ namespace Monopoly
         {
             get { return _PrixAchatMaison; }
             set { _PrixAchatMaison = value; }
+        }
+        public int NbMaison
+        {
+            get { return _nbMaison; }
+            set { _nbMaison = value; }
         }
         public bool Hotel
         {
@@ -55,10 +61,15 @@ namespace Monopoly
             get { return _Groupe; }
             set { _Groupe = value; }
         }
-        public List<int> CasesFamille
+        public new int Loyer
         {
-            get { return _CasesFamille; }
-            set { _CasesFamille = value; }
+            get { return _Loyer; }
+            set { _Loyer = modificationLoyer(); }
+        }
+        public int NbCasesFamille
+        {
+            get { return _NbCasesFamille; }
+            set { _NbCasesFamille = value; }
         }
 
         //*****Méthodes*****
@@ -66,14 +77,19 @@ namespace Monopoly
         {
             if (Proprietaire != null)
             {
-                foreach (Immobilier element in Proprietaire.Possessions)
+                foreach (Propriete element in Proprietaire.Possessions)
                 {
+                    int NbCarteFamille = 0;
                     //On cherche à savoir si le propriétaire de la case possède tous les terrains du même groupe. 
                     //Si c'est le cas et qu'ils sont nus, alors le prix de chaque loyer est doublé.
-                    //if (this.Groupe = Groupe)
-                    //{
-
-                    //}
+                    if (this.Groupe == element.Groupe && element.NbMaison == 0)
+                    {
+                        NbCarteFamille++;
+                    }
+                    if (NbCarteFamille == NbCasesFamille)
+                    {
+                        Loyer = _LoyersDuTerrain[0] * 2;
+                    }
                 }
                 //Calcul du loyer en fonction du nombre de maisons et hotel
                 if (_nbMaison == 1)

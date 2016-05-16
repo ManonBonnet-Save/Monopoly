@@ -54,7 +54,6 @@ namespace Monopoly
 			_Hotels = _Hotels + 1;
 		}
 
-
 	}
 }
 
