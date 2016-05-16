@@ -124,6 +124,9 @@ namespace Monopoly
                 Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
 
                 //Acheter des maison
+                Console.WriteLine("Voulez-vous acheter des maisons/hôtels? [o/N]");
+                ConsoleKeyInfo cki = Console.ReadKey();
+                //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète. 
 
 
                 if ((De1 != De2) || j.EstEnPrison())

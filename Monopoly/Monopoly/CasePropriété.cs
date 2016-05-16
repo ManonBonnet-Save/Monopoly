@@ -22,6 +22,19 @@ namespace Monopoly
                 if (_carte.Proprietaire.NumeroJoueur == j.NumeroJoueur) //Le joueur tombe sur un terrain lui appartenant.
                 {
                     Console.WriteLine("Le joueur {0} est chez lui", j.NumeroJoueur);
+                    if (_carte is Propriete)
+                    {
+                        foreach (Propriete element in j.Possessions)
+                        {
+                            int NbCarteFamille = 1;
+                            //On cherche à savoir si le propriétaire de la case possède tous les terrains du même groupe. 
+                            if (_carte.Groupe == element.Groupe && element.NbMaison == 0)
+                            {
+                                NbCarteFamille++;
+                            }
+                            //Il faut maintenant ressortir une liste des terrains surlesquels j peut mettre des maisons. 
+                        }
+                    }
                     return true;
                 }
 
