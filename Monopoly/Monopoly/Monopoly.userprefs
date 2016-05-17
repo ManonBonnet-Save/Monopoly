@@ -1,11 +1,25 @@
 ﻿<Properties StartupItem="Monopoly.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Joueur.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Propriete.cs">
     <Files>
-      <File FileName="Cartes.cs" Line="279" Column="1" />
+      <File FileName="Cartes.cs" Line="30" Column="1" />
       <File FileName="Program.cs" Line="1" Column="1" />
-      <File FileName="Joueur.cs" Line="248" Column="89" />
+      <File FileName="Joueur.cs" Line="139" Column="21" />
       <File FileName="Banque.cs" Line="1" Column="1" />
+      <File FileName="CaissedeCommunauté.cs" Line="1" Column="1" />
+      <File FileName="CaseAleatoire.cs" Line="1" Column="1" />
+      <File FileName="CasePolice.cs" Line="1" Column="1" />
+      <File FileName="CasePropriété.cs" Line="1" Column="1" />
+      <File FileName="CaseTaxe.cs" Line="1" Column="1" />
+      <File FileName="CaseTirage.cs" Line="1" Column="1" />
+      <File FileName="CaseVide.cs" Line="1" Column="1" />
+      <File FileName="Chance.cs" Line="1" Column="1" />
+      <File FileName="Compagnie.cs" Line="55" Column="48" />
+      <File FileName="Gare.cs" Line="1" Column="1" />
+      <File FileName="Immobilier.cs" Line="1" Column="1" />
+      <File FileName="Plateau.cs" Line="1" Column="1" />
+      <File FileName="Case.cs" Line="1" Column="1" />
+      <File FileName="Propriete.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -52,7 +52,7 @@ namespace Monopoly
                     return Loyer;
                 }
 
-                if (_NbCompagnies == 2) //Pour une deux compagnies le Loyer= 10*(somme des dés)
+                if (_NbCompagnies == 2) //Pour deux compagnies le Loyer= 10*(somme des dés)
                 {
                     //Le joueur lance deux dés de 6 faces
                     Random random = new Random();
