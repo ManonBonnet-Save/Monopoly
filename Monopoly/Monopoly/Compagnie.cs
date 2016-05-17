@@ -9,70 +9,30 @@ namespace Monopoly
     //Création de la classe des cartes compagnies
     public class Compagnie : Immobilier
     {
-        private List<int> _CasesCompagnies;
-        private int _Loyer;
-        private int _NbCompagnies;
-
         //*****Constructeurs*****
-        public Compagnie(string nom, int pa, int loyer) : base(nom, pa, loyer)
-        {
-            _Loyer = 0;
-        }
-        public new int Loyer
-        {
-            get { return _Loyer; }
-            set { _Loyer = modificationLoyer(); }
-        }
-
-        //*****Accesseurs*****
-
+        public Compagnie(string nom, int pa) : base(nom, pa){}
 
         //*****Méthodes*****
-        public override int modificationLoyer()
+        public override int Loyer()
         {
             if (Proprietaire != null)
             {
-                foreach (Immobilier element in Proprietaire.Possessions)
-                {
-                    if (element is Compagnie)
-                    {
-                        _NbCompagnies += 1;
-                    }
-                }
-                // On ne teste pas pour 0, puisque dans ce cas le propriétaire est null.
+                //Le joueur lance deux dés de 6 faces
+                Random random = new Random();
+                int De = random.Next(1, 7) + random.Next(1, 7);
 
-                if (_NbCompagnies == 1) //Pour une seule compagnie le Loyer= 4*(somme des dés)
-                {
-                    //Le joueur lance deux dés de 6 faces
-                    Random random = new Random();
-                    int De1 = random.Next(1, 7);
-                    int De2 = random.Next(1, 7);
-                    int De = De1 + De2;
-                    Loyer = 4 * De;
-                    return Loyer;
-                }
+                Console.WriteLine("Compagnie loyer : {0} au lancer et {1} compagnie(s)", De, _Proprietaire.NbCompagnie());
 
-                if (_NbCompagnies == 2) //Pour deux compagnies le Loyer= 10*(somme des dés)
-                {
-                    //Le joueur lance deux dés de 6 faces
-                    Random random = new Random();
-                    int De1 = random.Next(1, 7);
-                    int De2 = random.Next(1, 7);
-                    int De = De1 + De2;
-                    Loyer = 10 * De;
-                    return Loyer;
-                }
+                if (_Proprietaire.NbCompagnie() == 1) return De * 4;
+                if (_Proprietaire.NbCompagnie() == 2) return De * 10;                
+
                 else
                 {
                     Console.WriteLine("Il y a un problème, avec la comptabilisation des compagnies");
-                    return Loyer = 0;
+                    return 0;
                 }
             }
-            else
-            {
-                Loyer = 0;
-                return Loyer;
-            }
+            return 0;
         }
     }
 }

@@ -24,21 +24,22 @@ namespace Monopoly
                     Console.WriteLine("Le joueur {0} est chez lui", j.NumeroJoueur);
                     if (_carte is Propriete)
                     {
-                        foreach (Propriete element in j.Possessions)
-                        {
-                            int NbCarteFamille = 1;
-                            //On cherche à savoir si le propriétaire de la case possède tous les terrains du même groupe. 
-                            if (_carte.Groupe == element.Groupe && element.NbMaison == 0)
-                            {
-                                NbCarteFamille++;
-                            }
-                            //Il faut maintenant ressortir une liste des terrains surlesquels j peut mettre des maisons. 
-                        }
+                        //foreach (Propriete element in j.Possessions)
+                        //{
+                        //    int NbCarteFamille = 1;
+                        //    //On cherche à savoir si le propriétaire de la case possède tous les terrains du même groupe. 
+                        //    //if (_carte.Groupe == element.Groupe && element.NbMaison == 0)
+                        //    //{
+                        //    //    NbCarteFamille++;
+                        //    //}
+                        //    //Il faut maintenant ressortir une liste des terrains surlesquels j peut mettre des maisons. 
+                        //}
                     }
                     return true;
                 }
 
-                if (!j.Debiter(_carte.Loyer)) //Le joueur n'a pas assez d'argent pour payer le loyer, il donne ce qu'il lui reste et perd. 
+                int loyer = _carte.Loyer();
+                if (!j.Debiter(loyer)) //Le joueur n'a pas assez d'argent pour payer le loyer, il donne ce qu'il lui reste et perd. 
                 {
                     _carte.Proprietaire.Crediter(j.Argent);
                     Console.WriteLine("Le joueur {0} a donné ses {1} restant au joueur {2}", j.NumeroJoueur, j.Argent, _carte.Proprietaire.NumeroJoueur);
@@ -46,8 +47,8 @@ namespace Monopoly
                 }
                 else
                 {
-                    _carte.Proprietaire.Crediter(_carte.Loyer);
-                    Console.WriteLine("Le joueur {0} a payé {1} euros au joueur {2}", j.NumeroJoueur, _carte.Loyer, _carte.Proprietaire.NumeroJoueur);
+                    _carte.Proprietaire.Crediter(loyer);
+                    Console.WriteLine("Le joueur {0} a payé {1} euros au joueur {2}", j.NumeroJoueur, loyer, _carte.Proprietaire.NumeroJoueur);
                     return true;
                 }
             }

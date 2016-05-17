@@ -26,7 +26,7 @@ namespace Monopoly
 		{
 			_NumeroJoueur = numero++; //postfix incrémentation
 			_Nom = nom;
-			_Argent = 1500;
+			_Argent = 150000;
 			_Position = 0;
 			_CompteurPrison = 0;
 			_CompteurDouble = 0;
@@ -165,55 +165,55 @@ namespace Monopoly
             }
         }
 
-        public bool PayerDette(int montant)
-        {
-            List<string> HotelAVendre = new List<string>();
-            HotelAVendre.Add("Aucun");
-            List<string> MaisonAVendre = new List<string>();
-            MaisonAVendre.Add("Aucun");
-            if (Possessions != null)
-            {
-                while (montant > _Argent)
-                {
-                    foreach (Propriete I in Possessions)
-                    {
-                        if (I.Hotel)
-                        {
-                            HotelAVendre.Add(I.Nom);
-                        }
-                        if (I.NbMaison > 0 && !I.Hotel)
-                        {
-                            MaisonAVendre.Add(I.Nom);
-                        }
-                    }
-                    //Afficher les terrains avec Hotel
-                    int userChoiceIdx = 0;
-                    string alternativesDisplay = "";
-                    for (int i = 0; i < HotelAVendre.Count; i++)
-                    {
-                        if (i == userChoiceIdx)
-                            alternativesDisplay += "\n." + HotelAVendre[i];
-                        else
-                            alternativesDisplay += "\n" + HotelAVendre[i];
-                    }
+        //public bool PayerDette(int montant)
+        //{
+        //    List<string> HotelAVendre = new List<string>();
+        //    HotelAVendre.Add("Aucun");
+        //    List<string> MaisonAVendre = new List<string>();
+        //    MaisonAVendre.Add("Aucun");
+        //    if (Possessions != null)
+        //    {
+        //        while (montant > _Argent)
+        //        {
+        //            foreach (Propriete I in Possessions)
+        //            {
+        //                if (I.Hotel)
+        //                {
+        //                    HotelAVendre.Add(I.Nom);
+        //                }
+        //                if (I.NbMaison > 0 && !I.Hotel)
+        //                {
+        //                    MaisonAVendre.Add(I.Nom);
+        //                }
+        //            }
+        //            //Afficher les terrains avec Hotel
+        //            int userChoiceIdx = 0;
+        //            string alternativesDisplay = "";
+        //            for (int i = 0; i < HotelAVendre.Count; i++)
+        //            {
+        //                if (i == userChoiceIdx)
+        //                    alternativesDisplay += "\n." + HotelAVendre[i];
+        //                else
+        //                    alternativesDisplay += "\n" + HotelAVendre[i];
+        //            }
 
-                    //Naviguation dans la liste
-                    //Le plus important: définition de la touche du clavier.
-                    ConsoleKeyInfo cki = Console.ReadKey();
-                    if (cki.KeyChar == 's')
-                    {
-                        userChoiceIdx = (userChoiceIdx + 1) % HotelAVendre.Count;
-                    }
+        //            //Naviguation dans la liste
+        //            //Le plus important: définition de la touche du clavier.
+        //            ConsoleKeyInfo cki = Console.ReadKey();
+        //            if (cki.KeyChar == 's')
+        //            {
+        //                userChoiceIdx = (userChoiceIdx + 1) % HotelAVendre.Count;
+        //            }
 
 
-                    //VendreHotel(Selection, Banque);
+        //            //VendreHotel(Selection, Banque);
 
-                //Afficher les terrains avec Maison
-                }
-                return true;
-            }
-            else { return false; }
-        }
+        //        //Afficher les terrains avec Maison
+        //        }
+        //        return true;
+        //    }
+        //    else { return false; }
+        //}
 
         public void Crediter(int montant)
         {
@@ -223,15 +223,41 @@ namespace Monopoly
         public void VendreHotel(Propriete P, Banque B)
         {
             Argent += P.PrixAchatHotel;
-            P.Hotel = false;
-            B.Hotels ++;
+            //P.Hotel = false;
+            //B.Hotels ++;
         }
 
         public void VendreMaison(Propriete P, Banque B)
         {
             Argent = Argent + P.PrixAchatMaison;
             P.NbMaison --;
-            B.Maisons ++;
+            //B.Maisons ++;
+        }
+
+        public int NbGare()
+        {
+            int cpt = 0;
+            foreach(Immobilier p in Possessions)
+            {
+                if(p is Gare)
+                {
+                    cpt++;
+                }
+            }
+            return cpt;
+        }
+
+        public int NbCompagnie()
+        {
+            int cpt = 0;
+            foreach (Immobilier p in Possessions)
+            {
+                if (p is Compagnie)
+                {
+                    cpt++;
+                }
+            }
+            return cpt;
         }
         //public void VendreConstruction(Propriete p)
         //{
@@ -258,21 +284,7 @@ namespace Monopoly
 			}
 		}
 */
-
-        public static void Constuire()
-		{
-		}
-
-		public static void Abandonner()
-		{
-			// effacer toutce qui concerne ce joueur dans la partie. La banque récupère ses propriétés et son argent.
-		}
-
-		public static void ConsulterRegles()
-		{
-			// ouvrir un fichier texte contenant les règles du jeu.
-		}
-	}
+    }
 }
 
 //Ce que fait le joueur une fois qu'il s'est déplacé

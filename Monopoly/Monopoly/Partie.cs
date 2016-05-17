@@ -8,8 +8,10 @@ namespace Monopoly
 {
     class Partie
     {
-        public List<Joueur> ListeJoueurs;
-        public Plateau plateau; 
+        private List<Joueur> ListeJoueurs;
+        private Plateau plateau; 
+        private Banque _banque;
+        
 
         public Partie ()
         {
@@ -35,8 +37,7 @@ namespace Monopoly
                 ListeJoueurs.Add(new Joueur(CouleurDuJoueur));
             }
 
-            Banque Banque = new Banque();
-
+            _banque = new Banque();
         }
         public void BouclePrincipale()
         {
@@ -103,17 +104,17 @@ namespace Monopoly
                     {
                         Console.WriteLine("Le joueur {0} à perdu", j.NumeroJoueur);
 
-                        //Suppression des possessions du joueur qui as perdu
-                        foreach (Immobilier I in j.Possessions)
-                        {
-                            I.Proprietaire = null;
-                            foreach (Propriete P in j.Possessions)
-                            {
-                                P.NbMaison = 0;
-                                P.Hotel = false;
-                            }
-                            j.Possessions.Remove(I);
-                        }
+                        ////Suppression des possessions du joueur qui as perdu
+                        //foreach (Immobilier I in j.Possessions)
+                        //{
+                        //    I.Proprietaire = null;
+                        //    foreach (Propriete P in j.Possessions)
+                        //    {
+                        //        P.NbMaison = 0;
+                        //        P.Hotel = false;
+                        //    }
+                        //    j.Possessions.Remove(I);
+                        //}
 
                         ListeJoueurs.RemoveAt(joueurActuel);
                         joueurActuel = joueurActuel % ListeJoueurs.Count();
@@ -121,12 +122,35 @@ namespace Monopoly
                     }
                 }
 
-                Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
 
                 //Acheter des maison
                 Console.WriteLine("Voulez-vous acheter des maisons/hôtels? [o/N]");
                 ConsoleKeyInfo cki = Console.ReadKey();
-                //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète. 
+                if (cki.KeyChar == 'o' || cki.KeyChar == 'O')
+                {
+                    //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète.
+                    Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez construire");
+                    Console.WriteLine("0 - Aucun");
+                    List<Propriete> terrains_constructible = new List<Propriete>();
+                    int cpt = 0;
+                    foreach(Immobilier p in j.Possessions)
+                    {
+                        if (p is Propriete && _banque.GroupeComplet((Propriete)p) && ((Propriete)p).NbMaison < 5)
+                        {
+                            terrains_constructible.Add((Propriete)p);
+                            Console.WriteLine("{0} - {1}", cpt+1, terrains_constructible[cpt++].Nom);
+                        }
+                    }
+
+                    int indiceTerrain = Int32.Parse(Console.ReadLine());
+                    if(indiceTerrain > 0 && indiceTerrain < cpt)
+                    {
+                        Console.WriteLine("Vous avez choisi {0} - {1}", indiceTerrain , terrains_constructible[indiceTerrain-1].Nom);
+                        _banque.upgrader((Propriete)terrains_constructible[indiceTerrain - 1]);
+                        Console.WriteLine("Le terrain a maintenant {0} maisons", terrains_constructible[indiceTerrain - 1].NbMaison);
+                    }
+                }
+                Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
 
 
                 if ((De1 != De2) || j.EstEnPrison())

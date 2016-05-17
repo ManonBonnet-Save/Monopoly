@@ -23,20 +23,25 @@ namespace Monopoly
 		public int Maisons
 		{
 			get { return _Maisons; }
-			set { _Maisons = value; }
 		}
 		public int Hotels
 		{
 			get { return _Hotels; }
-			set { _Hotels = value; }
 		}
 
 		//*****  Méthodes et fonctions  *****
 
 		//Donne une maison
-		public void DonneMaison(Joueur J)
+		public void upgrader(Propriete p)
 		{
-			_Maisons = _Maisons - 1;
+            int prix =  p.NbMaison < 4 ?  p.PrixAchatMaison : p.PrixAchatHotel;
+            p.Proprietaire.Debiter(prix);
+            if (_Maisons > 0)
+            {
+                p.NbMaison++;
+                _Maisons--;
+            }
+
 		}
 		//Récupère une maison
 		public void RecupereMaison()
@@ -53,6 +58,25 @@ namespace Monopoly
 		{
 			_Hotels = _Hotels + 1;
 		}
+
+        //Vérifications
+        public bool GroupeComplet(Propriete p)
+        {
+            Joueur proprio = p.Proprietaire;
+            int idx = p.Groupe.index;
+            int cpt = 0;
+            foreach(Immobilier i in proprio.Possessions)
+            {
+                if(i is Propriete)
+                {
+                    Propriete tmp = (Propriete) i;
+                    if (tmp.Groupe.index == idx)
+                        cpt++;
+                }
+            }
+            if (cpt == p.Groupe.taille) return true;
+            return false;
+        }
 
 	}
 }
