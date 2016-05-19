@@ -26,7 +26,7 @@ namespace Monopoly
 		{
 			_NumeroJoueur = numero++; //postfix incrémentation
 			_Nom = nom;
-			_Argent = 150000;
+			_Argent = 1500;
 			_Position = 0;
 			_CompteurPrison = 0;
 			_CompteurDouble = 0;
@@ -164,56 +164,6 @@ namespace Monopoly
                 return false;
             }
         }
-
-        //public bool PayerDette(int montant)
-        //{
-        //    List<string> HotelAVendre = new List<string>();
-        //    HotelAVendre.Add("Aucun");
-        //    List<string> MaisonAVendre = new List<string>();
-        //    MaisonAVendre.Add("Aucun");
-        //    if (Possessions != null)
-        //    {
-        //        while (montant > _Argent)
-        //        {
-        //            foreach (Propriete I in Possessions)
-        //            {
-        //                if (I.Hotel)
-        //                {
-        //                    HotelAVendre.Add(I.Nom);
-        //                }
-        //                if (I.NbMaison > 0 && !I.Hotel)
-        //                {
-        //                    MaisonAVendre.Add(I.Nom);
-        //                }
-        //            }
-        //            //Afficher les terrains avec Hotel
-        //            int userChoiceIdx = 0;
-        //            string alternativesDisplay = "";
-        //            for (int i = 0; i < HotelAVendre.Count; i++)
-        //            {
-        //                if (i == userChoiceIdx)
-        //                    alternativesDisplay += "\n." + HotelAVendre[i];
-        //                else
-        //                    alternativesDisplay += "\n" + HotelAVendre[i];
-        //            }
-
-        //            //Naviguation dans la liste
-        //            //Le plus important: définition de la touche du clavier.
-        //            ConsoleKeyInfo cki = Console.ReadKey();
-        //            if (cki.KeyChar == 's')
-        //            {
-        //                userChoiceIdx = (userChoiceIdx + 1) % HotelAVendre.Count;
-        //            }
-
-
-        //            //VendreHotel(Selection, Banque);
-
-        //        //Afficher les terrains avec Maison
-        //        }
-        //        return true;
-        //    }
-        //    else { return false; }
-        //}
 
         public void Crediter(int montant)
         {

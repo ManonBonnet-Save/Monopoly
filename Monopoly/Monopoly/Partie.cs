@@ -32,9 +32,9 @@ namespace Monopoly
             int NbJoueurs = int.Parse(Console.ReadLine());
             for (int CptJ = 0; CptJ < NbJoueurs; ++CptJ)
             {
-                Console.WriteLine("Quelle est la couleur du joueur {0} ?", CptJ+1);
-                string CouleurDuJoueur = Console.ReadLine();
-                ListeJoueurs.Add(new Joueur(CouleurDuJoueur));
+                Console.WriteLine("Quelle est le nom du joueur {0} ?", CptJ+1);
+                string NomduJoueur = Console.ReadLine();
+                ListeJoueurs.Add(new Joueur(NomduJoueur));
             }
 
             _banque = new Banque();
@@ -57,7 +57,7 @@ namespace Monopoly
                 Random random = new Random();
                 int De1 = random.Next(1, 7);
                 int De2 = random.Next(1, 7);
-                Console.WriteLine("Le joueur {2} joue et fait un {0} et un {1}.", De1, De2, j.NumeroJoueur);
+                Console.WriteLine("Le joueur {2} joue et fait un {0} et un {1}.", De1, De2, j.Nom);
                 int De = De1 + De2;
 
                 if (De1 == De2)
@@ -161,8 +161,7 @@ namespace Monopoly
 
                 //Acheter des maison
                 //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète.
-                Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez construire");
-                Console.WriteLine("0 - Aucun");
+                
                 List<Propriete> terrains_constructible = new List<Propriete>();
                 int cpt = 0;
                 foreach (Immobilier p in j.Possessions)
@@ -170,7 +169,6 @@ namespace Monopoly
                     if (p is Propriete && _banque.GroupeComplet((Propriete)p) && ((Propriete)p).NbMaison < 5)
                     {
                         terrains_constructible.Add((Propriete)p);
-                        Console.WriteLine("{0} - {1}", cpt+1, terrains_constructible[cpt++].Nom);
                     }
                 }
 
@@ -180,8 +178,14 @@ namespace Monopoly
                     ConsoleKeyInfo cki = Console.ReadKey();
                     if (cki.KeyChar == 'o' || cki.KeyChar == 'O')
                     {
+                        Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez construire");
+                        Console.WriteLine("0 - Aucun");
+                        foreach (Propriete p in terrains_constructible)
+                        {
+                            Console.WriteLine("{0} - {1}", cpt + 1, terrains_constructible[cpt++].Nom);
+                        }
                         int indiceTerrain = Int32.Parse(Console.ReadLine());
-                        if (indiceTerrain > 0 && indiceTerrain < cpt)
+                        if (indiceTerrain > 0 && indiceTerrain <= cpt)
                         {
                             Console.WriteLine("Vous avez choisi {0} - {1}", indiceTerrain, terrains_constructible[indiceTerrain - 1].Nom);
                             _banque.VendreMaison((Propriete)terrains_constructible[indiceTerrain - 1]);

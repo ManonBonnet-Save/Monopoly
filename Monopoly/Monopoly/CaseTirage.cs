@@ -8,8 +8,21 @@ namespace Monopoly
 {
     class CaseTirage : Case
     {
-        public CaseTirage(string nom) : base(nom){ }
+        public Pioche PiocheCartes;
 
-        public override bool action(Joueur j) { return true; }
+        public CaseTirage(string nom, Pioche p) : base(nom)
+        {
+            PiocheCartes = p;
+        }
+
+        public override bool action(Joueur j)
+        {
+            int Index = PiocheCartes.idx;
+            Cartes CartePiochée = PiocheCartes.getCarte(Index);
+            //if (CartePiochée.)
+
+           // PiocheCartes.idx = ((PiocheCartes.idx + 1) % PiocheCartes.ListeCarte.Count);
+            return true;
+        }
     }
 }
