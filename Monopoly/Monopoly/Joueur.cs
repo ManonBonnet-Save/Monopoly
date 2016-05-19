@@ -259,6 +259,7 @@ namespace Monopoly
             }
             return cpt;
         }
+
         //public void VendreConstruction(Propriete p)
         //{
         //	if (p.Hotel == true)

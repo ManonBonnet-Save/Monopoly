@@ -102,54 +102,94 @@ namespace Monopoly
                     bool ok = plateau.getCase(j.Position).action(j);
                     if (!ok)
                     {
-                        Console.WriteLine("Le joueur {0} à perdu", j.NumeroJoueur);
-
-                        ////Suppression des possessions du joueur qui as perdu
-                        //foreach (Immobilier I in j.Possessions)
-                        //{
-                        //    I.Proprietaire = null;
-                        //    foreach (Propriete P in j.Possessions)
-                        //    {
-                        //        P.NbMaison = 0;
-                        //        P.Hotel = false;
-                        //    }
-                        //    j.Possessions.Remove(I);
-                        //}
-
-                        ListeJoueurs.RemoveAt(joueurActuel);
-                        joueurActuel = joueurActuel % ListeJoueurs.Count();
-                        continue;
-                    }
-                }
-
-
-                //Acheter des maison
-                Console.WriteLine("Voulez-vous acheter des maisons/hôtels? [o/N]");
-                ConsoleKeyInfo cki = Console.ReadKey();
-                if (cki.KeyChar == 'o' || cki.KeyChar == 'O')
-                {
-                    //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète.
-                    Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez construire");
-                    Console.WriteLine("0 - Aucun");
-                    List<Propriete> terrains_constructible = new List<Propriete>();
-                    int cpt = 0;
-                    foreach(Immobilier p in j.Possessions)
-                    {
-                        if (p is Propriete && _banque.GroupeComplet((Propriete)p) && ((Propriete)p).NbMaison < 5)
+                        while (!ok && j.NbMaison>0)
                         {
-                            terrains_constructible.Add((Propriete)p);
-                            Console.WriteLine("{0} - {1}", cpt+1, terrains_constructible[cpt++].Nom);
+                            Console.WriteLine("Vous n'avez pas assez d'argent pour payer vos dettes.");
+                            //Vendre des maison
+                            Console.WriteLine("Voulez-vous vendre des maisons/hôtels? [o/N]");
+                            ConsoleKeyInfo ckj = Console.ReadKey();
+                            if (ckj.KeyChar == 'o' || ckj.KeyChar == 'O')
+                            {
+                                //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète.
+                                Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez vendre des maisons.");
+                                Console.WriteLine("0 - Aucun");
+                                List<Propriete> terrains_avec_maison = new List<Propriete>();
+                                int Cpt = 0;
+                                foreach (Immobilier p in j.Possessions)
+                                {
+                                    if (p is Propriete && ((Propriete)p).NbMaison > 0)
+                                    {
+                                        terrains_avec_maison.Add((Propriete)p);
+                                        Console.WriteLine("{0} - {1}", Cpt + 1, terrains_avec_maison[Cpt++].Nom);
+                                    }
+                                }
+
+                                int indiceTerrain = Int32.Parse(Console.ReadLine());
+                                if (indiceTerrain > 0 && indiceTerrain < Cpt)
+                                {
+                                    Console.WriteLine("Vous avez choisi {0} - {1}", indiceTerrain, terrains_avec_maison[indiceTerrain - 1].Nom);
+                                    _banque.RecupereMaison((Propriete)terrains_avec_maison[indiceTerrain - 1]);
+                                    Console.WriteLine("Le terrain possède maintenant {0} maisons", terrains_avec_maison[indiceTerrain - 1].NbMaison);
+                                }
+                            }
+                            ok = plateau.getCase(j.Position).action(j);
+                        }
+                        
+                        bool ok2 = plateau.getCase(j.Position).action(j);
+                        if (!ok2)
+                        {
+                            //Suppression des possessions du joueur qui as perdu
+                            foreach (Immobilier I in j.Possessions)
+                            {
+                                foreach (Propriete P in j.Possessions)
+                                {
+                                    while (P.NbMaison > 0)
+                                    {
+                                        _banque.RecupereMaison(P);
+                                    }
+                                }
+                                I.Proprietaire = null;
+                                j.Possessions.Remove(I);
+                            }
+                            Console.WriteLine("Le joueur {0} à perdu", j.NumeroJoueur);
+                            ListeJoueurs.RemoveAt(joueurActuel);
+                            joueurActuel = joueurActuel % ListeJoueurs.Count();
+                            continue;
                         }
                     }
+                }
 
-                    int indiceTerrain = Int32.Parse(Console.ReadLine());
-                    if(indiceTerrain > 0 && indiceTerrain < cpt)
+                //Acheter des maison
+                //Sortir une liste des terrains sur lesquel j peut placer des maisons: famille complète.
+                Console.WriteLine("Veuillez séléctionner le terrain sur lequel vous voulez construire");
+                Console.WriteLine("0 - Aucun");
+                List<Propriete> terrains_constructible = new List<Propriete>();
+                int cpt = 0;
+                foreach (Immobilier p in j.Possessions)
+                {
+                    if (p is Propriete && _banque.GroupeComplet((Propriete)p) && ((Propriete)p).NbMaison < 5)
                     {
-                        Console.WriteLine("Vous avez choisi {0} - {1}", indiceTerrain , terrains_constructible[indiceTerrain-1].Nom);
-                        _banque.upgrader((Propriete)terrains_constructible[indiceTerrain - 1]);
-                        Console.WriteLine("Le terrain a maintenant {0} maisons", terrains_constructible[indiceTerrain - 1].NbMaison);
+                        terrains_constructible.Add((Propriete)p);
+                        Console.WriteLine("{0} - {1}", cpt+1, terrains_constructible[cpt++].Nom);
                     }
                 }
+
+                if (terrains_constructible.Count > 1)
+                {
+                    Console.WriteLine("Voulez-vous acheter des maisons/hôtels? [o/N]");
+                    ConsoleKeyInfo cki = Console.ReadKey();
+                    if (cki.KeyChar == 'o' || cki.KeyChar == 'O')
+                    {
+                        int indiceTerrain = Int32.Parse(Console.ReadLine());
+                        if (indiceTerrain > 0 && indiceTerrain < cpt)
+                        {
+                            Console.WriteLine("Vous avez choisi {0} - {1}", indiceTerrain, terrains_constructible[indiceTerrain - 1].Nom);
+                            _banque.VendreMaison((Propriete)terrains_constructible[indiceTerrain - 1]);
+                            Console.WriteLine("Le terrain possède maintenant {0} maisons", terrains_constructible[indiceTerrain - 1].NbMaison);
+                        }
+                    }
+                }
+
                 Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
 
 

@@ -19,7 +19,7 @@ namespace Monopoly
         {
             if(_carte.Proprietaire != null)
             {
-                if (_carte.Proprietaire.NumeroJoueur == j.NumeroJoueur) //Le joueur tombe sur un terrain lui appartenant.
+                if (_carte.Proprietaire.NumeroJoueur == j.NumeroJoueur) //Le joueur tombe sur un terrain qui lui appartenant.
                 {
                     Console.WriteLine("Le joueur {0} est chez lui", j.NumeroJoueur);
                     if (_carte is Propriete)
@@ -62,6 +62,7 @@ namespace Monopoly
                     j.Possessions.Add(_carte);
                     Console.WriteLine("Le joueur {0} a acheté {1} pour {2} euros", j.NumeroJoueur, _carte.Nom , _carte.PrixAchat);
                 }
+
                 //if ((cki.KeyChar == 'o' || cki.KeyChar == 'O') && !j.Debiter(_carte.PrixAchat))
                 //{
                 //    Console.WriteLine("Vous n'avez pas assez d'argent pour acquérir ce terrain.");

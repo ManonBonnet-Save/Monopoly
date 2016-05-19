@@ -32,34 +32,37 @@ namespace Monopoly
 		//*****  Méthodes et fonctions  *****
 
 		//Donne une maison
-		public void upgrader(Propriete p)
+		public void VendreMaison(Propriete p)
 		{
             int prix =  p.NbMaison < 4 ?  p.PrixAchatMaison : p.PrixAchatHotel;
-            p.Proprietaire.Debiter(prix);
-            if (_Maisons > 0)
+            if (_Maisons < 5)
             {
+                p.Proprietaire.Debiter(prix);
                 p.NbMaison++;
                 _Maisons--;
             }
-
 		}
 		//Récupère une maison
-		public void RecupereMaison()
+		public void RecupereMaison(Propriete P)
 		{
-			_Maisons = _Maisons + 1;
-		}
-		//Donne un hôtel
-		public void DonneHotel(Joueur J)
-		{
-			_Hotels = _Hotels - 1;
-		}
-		//Récupère un Hotel
-		public void RecupereHotel()
-		{
-			_Hotels = _Hotels + 1;
-		}
+            int prix = P.NbMaison < 4 ? P.PrixAchatMaison : P.PrixAchatHotel;
+            if (_Maisons < 5)
+            {
+                P.Proprietaire.Crediter(prix);
+                if (P.NbMaison == 5)
+                {
+                    P.NbMaison--;
+                    _Hotels++;
+                }
+                else
+                {
+                    P.NbMaison--;
+                    _Maisons++;
+                }
+            }
+        }
 
-        //Vérifications
+        //Vérifications que le groupe est complet
         public bool GroupeComplet(Propriete p)
         {
             Joueur proprio = p.Proprietaire;
