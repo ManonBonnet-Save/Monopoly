@@ -98,7 +98,7 @@ namespace Monopoly
                         j.Crediter(200);
                         Console.WriteLine("Vous êtes passé par la case départ, recevez 200 euros !");
                     }
-                    Console.WriteLine("Le joueur {0} est à la case : {1}", j.NumeroJoueur, plateau.getCase(j.Position).Nom);
+                    Console.WriteLine("Le joueur {0} est à la case : {1}", j.Nom, plateau.getCase(j.Position).Nom);
                     bool ok = plateau.getCase(j.Position).action(j);
                     if (!ok)
                     {
@@ -151,7 +151,7 @@ namespace Monopoly
                                 I.Proprietaire = null;
                                 j.Possessions.Remove(I);
                             }
-                            Console.WriteLine("Le joueur {0} à perdu", j.NumeroJoueur);
+                            Console.WriteLine("Le joueur {0} à perdu", j.Nom);
                             ListeJoueurs.RemoveAt(joueurActuel);
                             joueurActuel = joueurActuel % ListeJoueurs.Count();
                             continue;
@@ -194,7 +194,7 @@ namespace Monopoly
                     }
                 }
 
-                Console.WriteLine("Le joueur {0} possède {1} euros.", j.NumeroJoueur, j.Argent);
+                Console.WriteLine("Le joueur {0} possède {1} euros.", j.Nom, j.Argent);
 
 
                 if ((De1 != De2) || j.EstEnPrison())
@@ -208,7 +208,7 @@ namespace Monopoly
         }
         public void Fin()
         {
-            Console.WriteLine("Le joueur {0} a gagné la partie!", ListeJoueurs[0].NumeroJoueur);
+            Console.WriteLine("Le joueur {0} a gagné la partie!", ListeJoueurs[0].j.Nom);
             Console.ReadLine();
         }
 
